@@ -1,0 +1,25 @@
+techparts_odoo  | ERROR: couldn't create the logfile directory. Logging to the standard output.
+techparts_odoo  | 2026-09-25 09:32:37,971 1 WARNING ? odoo.tools.config: unknown option 'db_filter' in the config file at /etc/odoo/odoo.conf, option stored as-is, without parsing 
+techparts_odoo  | 2026-09-25 09:32:37,971 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 WARNING ? odoo.tools.config: unknown option 'db_filter' in the config file at /etc/odoo/odoo.conf, option stored as-is, without parsing 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 INFO ? odoo: Odoo version 19.0-20260908 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+techparts_odoo  | 2026-09-25 09:32:37,972 1 INFO ? odoo: database: odoo@db:5432 
+techparts_odoo  | 2026-09-25 09:32:38,489 1 INFO ? odoo.service.server: HTTP service (werkzeug) running on 0.0.0.0:8069 
+techparts_odoo  | 2026-09-25 09:32:38,492 14 INFO ? odoo.service.server: Worker WorkerHTTP (14) alive 
+techparts_odoo  | 2026-09-25 09:32:38,496 15 INFO ? odoo.service.server: Worker WorkerHTTP (15) alive 
+techparts_odoo  | 2026-09-25 09:32:38,502 17 INFO ? odoo.service.server: Worker WorkerCron (17) alive 
+techparts_odoo  | ERROR: couldn't create the logfile directory. Logging to the standard output.
+techparts_odoo  | 2026-09-25 09:32:39,082 16 WARNING ? odoo.tools.config: unknown option 'db_filter' in the config file at /etc/odoo/odoo.conf, option stored as-is, without parsing 
+techparts_odoo  | 2026-09-25 09:32:39,082 16 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 WARNING ? odoo.tools.config: unknown option 'db_filter' in the config file at /etc/odoo/odoo.conf, option stored as-is, without parsing 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 INFO ? odoo: Odoo version 19.0-20260908 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 INFO ? odoo: Using configuration file at /etc/odoo/odoo.conf 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 INFO ? odoo: addons paths: _NamespacePath(['/usr/lib/python3/dist-packages/odoo/addons', '/var/lib/odoo/addons/19.0', '/usr/lib/python3/dist-packages/addons']) 
+techparts_odoo  | 2026-09-25 09:32:39,083 16 INFO ? odoo: database: odoo@db:5432 
+techparts_odoo  | 2026-09-25 09:32:39,537 16 INFO ? odoo.service.server: Evented Service (longpolling) running on 0.0.0.0:8072 
