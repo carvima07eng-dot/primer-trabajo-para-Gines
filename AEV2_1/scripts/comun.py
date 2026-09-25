@@ -43,7 +43,10 @@ def logout(pg):
     esperar(pg, 800)
 
 
-def shot(pg, nombre, full=False):
+def shot(pg, nombre, full=False, apartar_raton=True):
+    if apartar_raton:  # evita tooltips del ratón en la captura
+        pg.mouse.move(pg.viewport_size["width"] - 5, pg.viewport_size["height"] - 5)
+        pg.wait_for_timeout(700)
     pg.screenshot(path=CAP + nombre, full_page=full)
     print("captura:", nombre)
 

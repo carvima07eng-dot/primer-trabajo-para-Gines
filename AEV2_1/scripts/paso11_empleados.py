@@ -11,5 +11,7 @@ with sync_playwright() as p:
     pg.goto(URL + "/odoo/employees")
     pg.wait_for_selector(".o_kanban_view, .o_list_view")
     esperar(pg)
+    pg.mouse.move(1300, 600)
+    esperar(pg, 800)
     shot(pg, "16_empleados_departamentos.png")
     b.close()

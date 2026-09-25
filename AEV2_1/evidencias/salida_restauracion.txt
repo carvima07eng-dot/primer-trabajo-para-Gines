@@ -1,11 +1,11 @@
-$ ./restore.sh backup/techparts_20260925_0946.sql backup/filestore_techparts_20260925_0946.tar.gz techparts_restore
+$ ./restore.sh backup/techparts_20260925_1003.sql backup/filestore_techparts_20260925_1003.tar.gz techparts_restore
 [1/4] Creando base de datos 'techparts_restore'...
 [2/4] Cargando el volcado SQL...
 [3/4] Restaurando el filestore...
 [4/4] Reiniciando Odoo...
 Restauración completada en 'techparts_restore'.
 
---- Verificación en la BD restaurada ---
+$ docker exec techparts_db psql -U odoo -d techparts_restore -c "SELECT login, name FROM res_users ..."
            login            |     name      
 ----------------------------+---------------
  carlos@techparts.es        | Carlos Méndez
@@ -20,10 +20,10 @@ Restauración completada en 'techparts_restore'.
 
  Empresa: TechParts S.L. | NIF: ESB46098765
 
-Adjuntos en BD: 608 | ficheros que faltan en el filestore restaurado: 0
+Adjuntos en BD: 604 | ficheros que faltan en el filestore restaurado: 0
 Login XML-RPC en techparts_restore como ana.garcia -> uid 5
-
 $ docker exec techparts_db dropdb -U odoo techparts_restore
 dropdb: error: database removal failed: ERROR:  database "techparts_restore" is being accessed by other users
+DETAIL:  There is 1 other session using the database.
 $ docker exec techparts_db dropdb -U odoo --force techparts_restore
 BD de prueba eliminada
