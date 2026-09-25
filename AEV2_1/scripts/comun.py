@@ -46,3 +46,14 @@ def logout(pg):
 def shot(pg, nombre, full=False):
     pg.screenshot(path=CAP + nombre, full_page=full)
     print("captura:", nombre)
+
+
+def abrir_menu_apps(pg):
+    """Despliega el menú de aplicaciones (icono de cuadrícula) y aparta el ratón."""
+    pg.locator(".o_navbar_apps_menu button").first.click()
+    pg.mouse.move(1300, 700)
+    esperar(pg, 1200)
+
+
+def aviso_tiempo_real(pg):
+    return pg.get_by_text("Se perdió la conexión en tiempo real").count() > 0
