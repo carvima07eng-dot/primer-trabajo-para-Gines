@@ -85,65 +85,66 @@ VERIF = [  # nombre, apps visibles (propias), menús dentro de la app principal
 
 INCIDENCIAS = [
     ("I-01", "Instalación",
-     "<code>docker info</code> devuelve <i>failed to connect to the docker API at unix:///var/run/docker.sock</i>.",
-     "El demonio de Docker no estaba arrancado.",
-     "Arrancar el servicio: <code>sudo systemctl start docker</code> (y <code>enable</code> para el arranque automático). "
-     "Se comprueba con <code>docker info</code> (figura 1)."),
+     "<code>docker info</code> da el error <i>failed to connect to the docker API at unix:///var/run/docker.sock</i>.",
+     "El servicio de Docker no estaba arrancado.",
+     "Lo arranqué con <code>sudo systemctl start docker</code> (y con <code>enable</code> para que arranque solo). "
+     "Lo comprobé otra vez con <code>docker info</code> (figura 1)."),
     ("I-02", "Instalación",
-     "Descarga de imágenes: <i>429 Too Many Requests</i> al repetir <code>docker compose pull</code>.",
-     "Límite de descargas anónimas de Docker Hub.",
-     "Las imágenes ya estaban en local, por lo que <code>up -d</code> funcionó. Se añadió <code>pull_policy: missing</code> "
-     "al <i>docker-compose.yml</i> para no volver a descargarlas; alternativa: <code>docker login</code>."),
+     "Al volver a hacer <code>docker compose pull</code> salió <i>429 Too Many Requests</i>.",
+     "Docker Hub limita las descargas que puedes hacer sin iniciar sesión.",
+     "Como ya tenía las imágenes descargadas, <code>up -d</code> funcionaba igual. Añadí <code>pull_policy: missing</code> "
+     "al <i>docker-compose.yml</i> para que no las vuelva a descargar. Otra opción es hacer <code>docker login</code>."),
     ("I-03", "Primer arranque",
      "<i>ERROR: couldn't create the logfile directory. Logging to the standard output.</i>",
-     "La carpeta <code>./logs</code> del host pertenece a root y Odoo se ejecuta dentro del contenedor como "
-     "usuario <code>odoo</code> (uid 100, gid 101).",
-     "<code>sudo chown 100:101 logs && chmod 775 logs</code> y reinicio. Ahora se escribe <code>logs/odoo.log</code>."),
+     "La carpeta <code>./logs</code> era de root y Odoo, dentro del contenedor, se ejecuta con el usuario "
+     "<code>odoo</code> (uid 100, gid 101), así que no podía escribir en ella.",
+     "<code>sudo chown 100:101 logs && chmod 775 logs</code> y reiniciar. Ya se crea el fichero <code>logs/odoo.log</code>."),
     ("I-04", "Primer arranque",
      "<i>unknown option 'db_filter' in the config file</i>.",
-     "Nombre de parámetro erróneo en <code>odoo.conf</code>.",
-     "El parámetro correcto es <code>dbfilter</code> (sin guion bajo). Se corrige a <code>dbfilter = ^techparts$</code>."),
+     "Había escrito mal el nombre del parámetro en el <code>odoo.conf</code>.",
+     "El nombre bueno es <code>dbfilter</code>, sin guion bajo. Lo cambié a <code>dbfilter = ^techparts$</code>."),
     ("I-05", "Primer arranque",
      "<i>missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0</i>.",
-     "Odoo 19 avisa de que el valor por defecto cambiará. Con 127.0.0.1 el puerto publicado por Docker dejaría de funcionar.",
-     "Se declara explícitamente <code>http_interface = 0.0.0.0</code> y <code>http_port = 8069</code>."),
+     "Odoo avisa de que en la versión 20 cambiará el valor por defecto. Con 127.0.0.1 no se podría entrar desde fuera "
+     "del contenedor.",
+     "Puse <code>http_interface = 0.0.0.0</code> y <code>http_port = 8069</code> en el <code>odoo.conf</code>."),
     ("I-06", "Primer arranque",
      "<i>option addons_path, invalid addons directory '/mnt/extra-addons', skipped</i>.",
-     "Odoo 19 ignora las rutas de addons que no contienen ningún módulo. La carpeta está vacía.",
-     "Aviso informativo, sin impacto. Desaparecerá al copiar el primer módulo propio en <code>addons/</code>."),
+     "La carpeta <code>addons</code> está vacía y Odoo 19 no usa carpetas sin módulos.",
+     "No hace falta hacer nada. El aviso se irá cuando meta algún módulo en <code>addons/</code>."),
     ("I-07", "Uso",
-     "Aviso en la esquina inferior: <i>Se perdió la conexión en tiempo real</i> (figura al final de esta sección).",
-     "Con <code>workers = 2</code> (modo multiproceso) el websocket <code>/websocket</code> se sirve en el puerto 8072 "
-     "(gevent). Sin proxy inverso, el navegador lo pide al 8069 y falla.",
-     "Entorno de aula sin nginx: <code>workers = 0</code> (modo multihilo, todo por el 8069). En producción: mantener "
-     "workers y poner nginx enrutando <code>/websocket</code> al 8072 con <code>proxy_mode = True</code>."),
+     "Abajo a la derecha salía <i>Se perdió la conexión en tiempo real</i> (figura al final de esta sección).",
+     "Con <code>workers = 2</code> la conexión en tiempo real (<code>/websocket</code>) va por el puerto 8072, pero el "
+     "navegador la busca en el 8069 porque no hay un nginx que la redirija.",
+     "Como es un entorno de prácticas, puse <code>workers = 0</code> y así todo va por el 8069. Para una empresa real "
+     "habría que dejar los workers y poner nginx mandando <code>/websocket</code> al 8072."),
     ("I-08", "Empresa",
      "Al guardar el NIF: <i>Parece que el número NIF [B46098765] para contacto [TechParts S.L.] no es válido</i>.",
-     "Al instalar Facturación se activan <code>l10n_es</code> y <code>base_vat</code>, que validan el dígito de control. "
-     "Para <code>B4609876</code> el dígito correcto es <b>0</b> (B46098760); el CIF del enunciado es ficticio.",
-     "El NIF exacto del enunciado (ESB46098765) se registró antes de instalar Facturación y queda guardado. "
-     "Si se edita de nuevo, Odoo lo rechaza. Se documenta el motivo y se mantiene el dato pedido."),
+     "Al instalar Facturación se instala la localización española, que comprueba la última cifra del NIF. Haciendo la "
+     "cuenta, para <code>B4609876</code> la última cifra debería ser <b>0</b> (B46098760). El CIF del enunciado es inventado.",
+     "Yo ya había guardado el NIF del enunciado (ESB46098765) antes de instalar Facturación, así que se quedó guardado. "
+     "Si lo vuelves a escribir, Odoo no lo acepta. Lo dejo como pide el enunciado y lo explico aquí."),
     ("I-09", "Permisos",
-     "En la ficha de usuario no existe la opción «Contable» para Facturación (solo <i>Facturación</i> / <i>Administrador</i>).",
-     "En Odoo Community el nivel «Contable» (<code>account.group_account_user</code>) es un grupo técnico oculto.",
-     "Modo desarrollador (<code>?debug=1</code>) → Usuario → Grupos: añadir «Mostrar características de "
-     "contabilidad completas». Marcos obtiene los menús Contabilidad y Revisión, pero no Configuración."),
+     "En el usuario no aparece la opción «Contable» en Facturación. Solo salen <i>Facturación</i> y <i>Administrador</i>.",
+     "En la versión Community de Odoo el permiso de «Contable» existe, pero está oculto.",
+     "Activé el modo desarrollador (<code>?debug=1</code>) y, en el usuario, en Grupos, añadí «Mostrar características "
+     "de contabilidad completas». Así Marcos tiene los menús de Contabilidad y Revisión, pero no Configuración."),
     ("I-10", "Permisos",
-     "No aparece un permiso independiente para CRM.",
-     "En Odoo 19 el acceso a CRM lo concede el privilegio de <b>Ventas</b> (grupos <code>sales_team</code>).",
-     "Ventas: Usuario/Administrador ya da acceso a CRM. Se verificó que Ana, Pedro y Sofía ven la app CRM."),
+     "No hay un permiso aparte para CRM.",
+     "En Odoo 19 el acceso a CRM va con el permiso de <b>Ventas</b>.",
+     "Con el permiso de Ventas ya tienen CRM. Comprobé que Ana, Pedro y Sofía ven la app CRM."),
     ("I-11", "Permisos",
-     "Los usuarios no administradores ven el menú «Aplicaciones».",
-     "Odoo 19 instala <code>base_install_request</code>: los usuarios pueden <i>solicitar</i> una app al administrador.",
-     "Comportamiento estándar. No pueden instalar nada (no tienen Ajustes ni permisos de administrador)."),
-    ("I-12", "Estética",
-     "El avatar del administrador seguía mostrando la letra «A».",
-     "La imagen se generó al crear la BD con el nombre «Administrator».",
-     "Borrar la imagen del contacto para que Odoo la regenere con la inicial «C» de Carlos Méndez."),
+     "Los usuarios que no son administradores ven el menú «Aplicaciones».",
+     "Odoo 19 deja que cualquier usuario <i>pida</i> al administrador que instale una aplicación.",
+     "Es normal. No pueden instalar nada porque no tienen permisos de administrador."),
+    ("I-12", "Aspecto",
+     "La foto del administrador seguía teniendo la letra «A».",
+     "Se creó al principio, cuando el usuario se llamaba «Administrator».",
+     "Borré la imagen del contacto y Odoo la volvió a crear con la «C» de Carlos Méndez."),
     ("I-13", "Copia de seguridad",
-     "<code>dropdb techparts_restore</code>: <i>database is being accessed by other users</i>.",
-     "Odoo mantenía abierta una conexión a la BD de prueba tras el test de login.",
-     "<code>dropdb --force</code> (PostgreSQL ≥ 13), que cierra las conexiones antes de borrar."),
+     "<code>dropdb techparts_restore</code> daba <i>database is being accessed by other users</i>.",
+     "Odoo seguía conectado a la base de datos de prueba después de probar el login.",
+     "Usé <code>dropdb --force</code>, que cierra las conexiones y luego la borra."),
 ]
 
 # --------------------------------------------------------------------------- #
@@ -217,7 +218,7 @@ def indice():
              "Creación de la base de datos", "Configuración de la empresa", "Instalación de módulos",
              "Usuarios y permisos", "Verificación de accesos por usuario", "Copia de seguridad y restauración",
              "Incidencias encontradas y resolución", "Conclusiones",
-             "Anexo A. Contenido del ZIP entregado", "Anexo B. Scripts de automatización"]
+             "Anexo A. Contenido del ZIP entregado", "Anexo B. Scripts que he usado"]
     li = "".join(f"<div>{i + 1 if i < 12 else ''}{'.' if i < 12 else ''} {t}</div>" for i, t in enumerate(items))
     return f"<h1 style='page-break-before:always'>Índice</h1><div class='indice'>{li}</div>"
 
@@ -234,12 +235,12 @@ def cuerpo():
     # 1 -------------------------------------------------------------------
     s.append(f"""
 <h1>1. Introducción y entorno de trabajo</h1>
-<p>Este documento describe, paso a paso, la instalación y configuración completa de un entorno <b>Odoo 19</b>
-para la empresa <b>TechParts S.L.</b> (continuación del caso de la UD1), siguiendo el método de la sección 2.4
-de los apuntes: <b>Docker Compose</b> con dos contenedores, uno para Odoo y otro para PostgreSQL.
-Incluye los comandos ejecutados, las capturas de cada fase, la tabla de usuarios y permisos, la copia de seguridad
-restaurable y las incidencias encontradas con su solución.</p>
-<h2>1.1 Arquitectura desplegada</h2>
+<p>En este manual explico cómo he instalado y configurado <b>Odoo 19</b> para la empresa <b>TechParts S.L.</b>,
+que es la misma empresa de la UD1. He seguido la sección 2.4 de los apuntes y lo he montado con <b>Docker Compose</b>,
+usando dos contenedores: uno para Odoo y otro para la base de datos PostgreSQL.</p>
+<p>Para cada paso pongo los comandos que he usado y capturas de pantalla. Al final están la tabla con los usuarios y
+sus permisos, la copia de seguridad y los problemas que me han ido saliendo y cómo los he solucionado.</p>
+<h2>1.1 Esquema de la instalación</h2>
 <div class="arq">
   <div class="caja"><b>Navegador</b><br>http://localhost:8069</div><div class="flecha">➜</div>
   <div class="caja"><b>techparts_odoo</b><br>imagen <code>odoo:19.0</code><br>puertos 8069 / 8072<br>vol. <code>odoo-web-data</code> (filestore)</div>
@@ -249,7 +250,7 @@ restaurable y las incidencias encontradas con su solución.</p>
 <h2>1.2 Versiones utilizadas</h2>
 <table><tr><th>Componente</th><th>Versión</th><th>Función</th></tr>
 <tr><td>Docker Engine</td><td>29.3.1</td><td>Motor de contenedores</td></tr>
-<tr><td>Docker Compose</td><td>v5.1.1 (plugin <code>docker compose</code>)</td><td>Orquestación de los dos servicios</td></tr>
+<tr><td>Docker Compose</td><td>v5.1.1 (plugin <code>docker compose</code>)</td><td>Levantar los dos contenedores a la vez</td></tr>
 <tr><td>Odoo</td><td>19.0-20260908 (Community)</td><td>ERP-CRM</td></tr>
 <tr><td>PostgreSQL</td><td>16.15</td><td>Base de datos</td></tr>
 <tr><td>Navegador</td><td>Chromium</td><td>Acceso web y capturas</td></tr></table>
@@ -258,15 +259,15 @@ restaurable y las incidencias encontradas con su solución.</p>
     # 2 -------------------------------------------------------------------
     s.append(f"""
 <h1>2. Preparación del sistema anfitrión</h1>
-<p>Antes de desplegar se comprueba que Docker y Docker Compose están instalados y que el demonio está en marcha.
-En la primera comprobación el demonio no estaba arrancado (incidencia <b>I-01</b>). Se arrancó con
-<code>systemctl</code>.</p>
+<p>Lo primero que hice fue comprobar que tenía Docker y Docker Compose instalados. Al ejecutar
+<code>docker info</code> me dio un error porque el servicio de Docker no estaba arrancado (incidencia <b>I-01</b>),
+así que lo arranqué con <code>systemctl</code> y ya funcionó.</p>
 {cmd('''sudo systemctl start docker
 sudo systemctl enable docker
 docker --version
 docker compose version
 docker info''')}
-{fig("T00_terminal_docker_daemon.png", "Incidencia I-01: el demonio de Docker no estaba en ejecución; se arranca y se verifica.")}
+{fig("T00_terminal_docker_daemon.png", "Incidencia I-01: Docker no estaba arrancado. Lo arranco y compruebo que ya funciona.")}
 {fig("T01_terminal_versiones.png", "Versiones de Docker Engine y Docker Compose.")}
 """)
     # 3 -------------------------------------------------------------------
@@ -279,63 +280,64 @@ sudo chown 100:101 logs && chmod 775 logs   # usuario odoo del contenedor (ver I
 <table><tr><th>Ruta</th><th>Contenido</th><th>Montaje en el contenedor</th></tr>
 <tr><td><code>docker-compose.yml</code></td><td>Definición de los servicios <i>db</i> y <i>odoo</i></td><td>—</td></tr>
 <tr><td><code>config/odoo.conf</code></td><td>Configuración del servidor Odoo</td><td><code>/etc/odoo</code></td></tr>
-<tr><td><code>addons/</code></td><td>Módulos propios o de terceros (vacía de momento)</td><td><code>/mnt/extra-addons</code></td></tr>
+<tr><td><code>addons/</code></td><td>Para módulos propios (de momento está vacía)</td><td><code>/mnt/extra-addons</code></td></tr>
 <tr><td><code>logs/</code></td><td>Fichero <code>odoo.log</code></td><td><code>/var/log/odoo</code></td></tr>
 <tr><td><code>backup.sh</code> / <code>restore.sh</code></td><td>Scripts de copia y restauración (sección 10)</td><td>—</td></tr></table>
-{tab_pie("Estructura de carpetas del proyecto.")}
-{fig("T02_terminal_estructura.png", "Estructura creada y permisos de la carpeta logs (uid 100 / gid 101 = usuario odoo).")}
+{tab_pie("Carpetas del proyecto.")}
+{fig("T02_terminal_estructura.png", "Carpetas creadas y permisos de la carpeta logs (100:101 es el usuario odoo del contenedor).")}
 <h2>3.2 docker-compose.yml</h2>
-<p>Aspectos clave: <code>depends_on</code> con <code>condition: service_healthy</code>, para que Odoo no arranque
-hasta que PostgreSQL responda a <code>pg_isready</code>; volúmenes con nombre para que los datos persistan aunque se
-eliminen los contenedores; y <code>pull_policy: missing</code> (incidencia I-02).</p>
+<p>Lo más importante del fichero: con <code>depends_on</code> y <code>service_healthy</code> hago que Odoo espere
+a que la base de datos esté lista antes de arrancar. Los volúmenes sirven para no perder los datos aunque borre los
+contenedores. <code>pull_policy: missing</code> lo añadí después por la incidencia I-02.</p>
 {code(compose)}
 <h2>3.3 config/odoo.conf</h2>
-<p>Parámetros destacados: <code>admin_passwd</code> (contraseña maestra del gestor de BD), <code>dbfilter</code>
-(solo se sirve la BD <i>techparts</i>), <code>without_demo</code> (sin datos de ejemplo), <code>logfile</code> y
-<code>workers = 0</code> (incidencia I-07).</p>
+<p>Lo que he configurado: <code>admin_passwd</code> es la contraseña maestra para crear y hacer copias de las bases
+de datos; <code>dbfilter</code> hace que solo se use la base de datos <i>techparts</i>; <code>without_demo</code> quita
+los datos de ejemplo; <code>logfile</code> guarda el log en la carpeta logs; y <code>workers = 0</code> lo cambié por la
+incidencia I-07.</p>
 {code(conf)}
 """)
     # 4 -------------------------------------------------------------------
     s.append(f"""
 <h1>4. Despliegue con Docker Compose</h1>
 {cmd('''docker compose pull        # descarga odoo:19.0 y postgres:16
-docker compose up -d       # crea la red, los volúmenes y arranca los contenedores
+docker compose up -d       # crea la red y los volúmenes y arranca los contenedores
 docker compose ps
 docker compose logs -f odoo''')}
-{fig("T03_terminal_pull.png", "Descarga de las imágenes oficiales (odoo:19.0 ≈ 3,3 GB; postgres:16 ≈ 640 MB).")}
-{fig("T04_terminal_up.png", "docker compose up -d: la BD pasa a «Healthy» antes de arrancar Odoo.")}
-{fig("T05_terminal_ps.png", "Contenedores en marcha, Odoo responde HTTP 200 y volúmenes persistentes creados.")}
+{fig("T03_terminal_pull.png", "Descarga de las imágenes (odoo:19.0 ocupa unos 3,3 GB y postgres:16 unos 640 MB).")}
+{fig("T04_terminal_up.png", "docker compose up -d: primero arranca la base de datos y, cuando está «Healthy», arranca Odoo.")}
+{fig("T05_terminal_ps.png", "Los dos contenedores funcionando, Odoo responde con un 200 y los volúmenes están creados.")}
 <h2>4.1 Primer arranque: avisos y errores</h2>
-<p>El primer arranque funcionó, pero el log mostró un error y tres avisos (incidencias I-03 a I-06). Se corrigieron
-en <code>odoo.conf</code> y en los permisos de <code>logs/</code>, y se reinició con
-<code>docker compose restart odoo</code>. Después, el único aviso que queda es el informativo de la carpeta
-<code>addons</code> vacía.</p>
-{fig("T06_terminal_errores_arranque.png", "Log del primer arranque: permisos de logs, db_filter, http_interface y addons vacío.")}
-{fig("T07_terminal_odoo_conf.png", "odoo.conf definitivo tras las correcciones.")}
+<p>Odoo arrancó a la primera, pero al mirar el log vi un error y tres avisos (incidencias I-03 a I-06). Los arreglé
+cambiando el <code>odoo.conf</code> y los permisos de la carpeta <code>logs/</code>, y reinicié con
+<code>docker compose restart odoo</code>. Ahora solo queda el aviso de la carpeta <code>addons</code> vacía, que no
+afecta a nada.</p>
+{fig("T06_terminal_errores_arranque.png", "Log del primer arranque con los errores y avisos que me salieron.")}
+{fig("T07_terminal_odoo_conf.png", "Así quedó el odoo.conf después de corregirlo.")}
 """)
     # 5 -------------------------------------------------------------------
     s.append(f"""
 <h1>5. Creación de la base de datos</h1>
-<p>Se accede a <code>http://localhost:8069</code>. Como no hay ninguna base de datos, Odoo redirige al gestor
-(<code>/web/database/manager</code>). Datos introducidos:</p>
+<p>Entré en <code>http://localhost:8069</code> y, como todavía no había ninguna base de datos, Odoo me llevó
+directamente a la pantalla para crearla (<code>/web/database/manager</code>). Rellené estos datos:</p>
 <table><tr><th>Campo</th><th>Valor</th></tr>
 <tr><td>Master Password</td><td>la definida en <code>admin_passwd</code></td></tr>
 <tr><td>Database Name</td><td><code>techparts</code></td></tr>
 <tr><td>Email / Password</td><td><code>carlos@techparts.es</code> / <code>Carlos2025!</code> (será el usuario 1, Carlos Méndez)</td></tr>
 <tr><td>Phone</td><td>+34 960 987 654</td></tr>
 <tr><td>Language / Country</td><td>Spanish / Español · Spain</td></tr>
-<tr><td>Demo Data</td><td>Desmarcado</td></tr></table>
+<tr><td>Demo Data</td><td>Sin marcar</td></tr></table>
 {tab_pie("Parámetros de creación de la base de datos.")}
-<div class="nota">El usuario administrador que crea el asistente se reutiliza como <b>Carlos Méndez</b>
-(Administrador), así la plantilla queda con exactamente los 8 usuarios del enunciado.</div>
-{par(fig("03_gestor_bd_vacio.png", "Gestor de bases de datos (sin BD)."), fig("04_crear_bd_formulario.png", "Formulario de creación de la BD techparts."))}
-{par(fig("05_pantalla_login.png", "Pantalla de inicio de sesión."), fig("06_primer_acceso_odoo.png", "Primer acceso: panel de Aplicaciones, compañía «My Company»."))}
+<div class="nota">El usuario administrador que se crea aquí lo he usado como <b>Carlos Méndez</b>
+(Administrador). Así en total hay justo los 8 usuarios que pide el enunciado.</div>
+{par(fig("03_gestor_bd_vacio.png", "Pantalla para crear la base de datos."), fig("04_crear_bd_formulario.png", "Formulario de creación de la BD techparts."))}
+{par(fig("05_pantalla_login.png", "Pantalla de inicio de sesión."), fig("06_primer_acceso_odoo.png", "Primera vez que entro: todavía pone «My Company»."))}
 """)
     # 6 -------------------------------------------------------------------
     s.append(f"""
 <h1>6. Configuración de la empresa</h1>
-<p>Ruta: <b>Ajustes → Opciones generales → Compañías → Actualizar información</b> (o
-<b>Ajustes → Usuarios y compañías → Compañías</b>). Datos introducidos:</p>
+<p>Los datos de la empresa se ponen en <b>Ajustes → Opciones generales → Compañías → Actualizar información</b>
+(también se puede entrar desde <b>Ajustes → Usuarios y compañías → Compañías</b>). Puse estos datos:</p>
 <table><tr><th>Campo</th><th>Valor</th></tr>
 <tr><td>Nombre</td><td>TechParts S.L.</td></tr><tr><td>NIF</td><td>ESB46098765 (B-46098765) — ver I-08</td></tr>
 <tr><td>Dirección</td><td>Polígono Industrial Fuente del Jarro<br>C/ de la Innovación, 7, nave 3</td></tr>
@@ -343,65 +345,65 @@ en <code>odoo.conf</code> y en los permisos de <code>logs/</code>, y se reinici�
 <tr><td>Teléfono</td><td>+34 960 987 654</td></tr><tr><td>Email</td><td>admin@techparts.es</td></tr>
 <tr><td>Sitio web</td><td>https://www.techparts.es</td></tr><tr><td>Moneda</td><td>EUR (Euro)</td></tr>
 <tr><td>Zona horaria</td><td>Europe/Madrid (preferencias de los 8 usuarios y horario laboral de la empresa)</td></tr>
-<tr><td>Logotipo</td><td>Engranaje con pistas de circuito (<code>proyecto/logo_techparts.png</code>), diseño propio</td></tr></table>
+<tr><td>Logotipo</td><td>Un engranaje con un circuito dentro (<code>proyecto/logo_techparts.png</code>), hecho por mí</td></tr></table>
 {tab_pie("Datos de la empresa TechParts S.L.")}
-{fig("07_datos_empresa.png", "Ficha de la compañía con todos los datos, logotipo y moneda EUR.", "92%")}
-{fig("08_ajustes_compania.png", "Ajustes generales: resumen de la compañía.", "92%")}
-{fig("inc_nif_invalido.png", "Incidencia I-08: base_vat rechaza el CIF del enunciado porque el dígito de control no es válido.", "92%")}
+{fig("07_datos_empresa.png", "Ficha de la empresa con todos los datos, el logo y la moneda en EUR.", "92%")}
+{fig("08_ajustes_compania.png", "Resumen de la empresa en Ajustes.", "92%")}
+{fig("inc_nif_invalido.png", "Incidencia I-08: Odoo no acepta el CIF del enunciado porque la última cifra (dígito de control) no cuadra.", "92%")}
 """)
     # 7 -------------------------------------------------------------------
     s.append(f"""
 <h1>7. Instalación de módulos</h1>
-<p>Desde el menú <b>Aplicaciones</b> se pulsó <b>Activar</b> en cada uno de los 6 módulos. Odoo instala además
-sus dependencias y, al ser España el país de la compañía, la localización <code>l10n_es</code> con el plan
-contable <b>PGCE PYMEs 2008</b> (<code>es_pymes</code>) y la validación de NIF (<code>base_vat</code>).</p>
+<p>En el menú <b>Aplicaciones</b> le di a <b>Activar</b> en los 6 módulos. Odoo instala también otros módulos que
+necesitan y, como la empresa es de España, instaló solo la localización española (<code>l10n_es</code>) con el plan
+contable de <b>PYMEs 2008</b> y la comprobación del NIF (<code>base_vat</code>).</p>
 <table><tr><th>Aplicación</th><th>Módulo técnico</th><th>Tiempo de instalación</th></tr>
-<tr><td>Ventas</td><td><code>sale_management</code></td><td>44,4 s (incluye dependencias comunes)</td></tr>
+<tr><td>Ventas</td><td><code>sale_management</code></td><td>44,4 s (el primero tarda más porque instala cosas comunes)</td></tr>
 <tr><td>Compras</td><td><code>purchase</code></td><td>4,2 s</td></tr>
 <tr><td>Inventario</td><td><code>stock</code></td><td>13,1 s</td></tr>
 <tr><td>CRM</td><td><code>crm</code></td><td>7,5 s</td></tr>
 <tr><td>Facturación</td><td><code>account</code> (+ <code>l10n_es</code>, <code>base_vat</code>)</td><td>3,5 s</td></tr>
 <tr><td>Empleados</td><td><code>hr</code></td><td>10,8 s</td></tr></table>
 {tab_pie("Módulos instalados.")}
-{fig("09_modulos_instalados.png", "Aplicaciones con los filtros «Aplicaciones» + «Instalado»: los 6 módulos y sus dependencias.", "92%")}
-{fig("10_menu_apps_administrador.png", "Menú de aplicaciones del administrador tras la instalación.", "80%")}
+{fig("09_modulos_instalados.png", "Aplicaciones filtrando por «Instalado»: salen los 6 módulos y algunos que se instalan con ellos.", "92%")}
+{fig("10_menu_apps_administrador.png", "Menú de aplicaciones del administrador después de instalar todo.", "80%")}
 """)
     # 8 -------------------------------------------------------------------
     filas = "".join(f"<tr><td>{u[0]}</td><td>{u[1]}</td><td>{u[2]}</td><td><code>{u[3]}</code></td><td>{u[4]}</td>"
                     f"<td>{u[5]}</td><td>{u[6]}</td></tr>" for u in USUARIOS)
     s.append(f"""
 <h1>8. Usuarios y permisos</h1>
-<p>Ruta: <b>Ajustes → Usuarios y compañías → Usuarios → Nuevo</b>. Para cada usuario se rellenan nombre y
-email (login), se asigna la contraseña (<i>Acción → Cambiar contraseña</i>) y, en la pestaña
-<b>Permisos de acceso</b>, el nivel de cada aplicación. En <b>Preferencias</b> se fija idioma Español y zona horaria
-Europe/Madrid. Además, en <b>Empleados</b> se crearon los 5 departamentos (Dirección, Ventas, Almacén, Compras,
-Administración) con la ficha de empleado de cada usuario y su responsable.</p>
+<p>Los usuarios se crean en <b>Ajustes → Usuarios y compañías → Usuarios → Nuevo</b>. En cada uno puse el nombre y
+el email (que es el login), la contraseña (<i>Acción → Cambiar contraseña</i>) y, en la pestaña
+<b>Permisos de acceso</b>, el permiso de cada aplicación. En <b>Preferencias</b> puse el idioma en español y la zona
+horaria Europe/Madrid. Además, en <b>Empleados</b> creé los 5 departamentos (Dirección, Ventas, Almacén, Compras y
+Administración) con cada empleado en el suyo y un responsable por departamento.</p>
 <h2>8.1 Tabla resumen de usuarios y permisos</h2>
 <table><tr><th>#</th><th>Nombre</th><th>Login</th><th>Contraseña</th><th>Dpto.</th><th>Permiso pedido</th><th>Configuración en Odoo 19</th></tr>{filas}</table>
-{tab_pie("Usuarios creados y correspondencia entre el permiso pedido y el nivel real de Odoo 19.")}
-<div class="nota"><b>Criterios de correspondencia.</b> En Odoo 19 «Responsable» equivale al nivel
-<i>Administrador</i> de cada aplicación. Para «Ventas: Usuario» se eligió el nivel más restrictivo, <i>Solo mostrar
-documentos propios</i> (mínimo privilegio): cada comercial ve sus propios presupuestos y oportunidades, y Ana,
-como responsable, los de todo el equipo. CRM no tiene privilegio propio: lo concede Ventas (I-10). «Contable» se
-asigna con el grupo técnico correspondiente (I-09).</div>
-{fig("11_lista_usuarios.png", "Lista de los 8 usuarios internos creados.", "92%")}
+{tab_pie("Usuarios creados y qué permiso he elegido en Odoo 19 para cada uno.")}
+<div class="nota"><b>Por qué he elegido estos permisos.</b> En Odoo 19 no pone «Responsable»; lo que más se
+parece es el nivel <i>Administrador</i> de cada aplicación. Para «Ventas: Usuario» he puesto <i>Solo mostrar documentos
+propios</i>, para que cada comercial vea solo sus presupuestos y oportunidades, mientras que Ana, como responsable, ve los
+de todos. CRM no tiene un permiso aparte, va incluido en el de Ventas (I-10). Lo de «Contable» lo explico en la
+incidencia I-09.</div>
+{fig("11_lista_usuarios.png", "Lista con los 8 usuarios creados.", "92%")}
 {par(fig("12_permisos_ana_garcia.png", "Ana García: Ventas = Administrador (Responsable)."), fig("13_permisos_javier_romero.png", "Javier Romero: Inventario = Administrador (Responsable)."))}
 {par(fig("14_permisos_marcos_soler.png", "Marcos Soler: Contabilidad = Facturación…"), fig("15_marcos_grupos_modo_desarrollador.png", "…y, en modo desarrollador, el grupo «Mostrar características de contabilidad completas» (Contable)."))}
-{fig("16_empleados_departamentos.png", "App Empleados: 8 empleados en los 5 departamentos.", "92%")}
+{fig("16_empleados_departamentos.png", "App Empleados: los 8 empleados repartidos en los 5 departamentos.", "92%")}
 """)
     # 9 -------------------------------------------------------------------
     filas = "".join(f"<tr><td>{v[0]}</td><td>{v[1]}</td><td>{v[2]}</td><td>{v[3]}</td></tr>" for v in VERIF)
     s.append(f"""
 <h1>9. Verificación de accesos por usuario</h1>
-<p>Se cerró la sesión del administrador y se entró con <b>cada una de las 8 cuentas</b>, comprobando las aplicaciones
-visibles y los menús dentro de la aplicación de su departamento. Todos los usuarios internos ven además las apps comunes
-<i>Conversaciones, Calendario, Contactos, Tableros, Empleados</i> (directorio) y <i>Aplicaciones</i> (solo para
-solicitar instalaciones, ver I-11).</p>
+<p>Para comprobar los permisos cerré la sesión del administrador y fui entrando con <b>cada uno de los 8 usuarios</b>.
+En cada uno miré qué aplicaciones le salen y qué menús tiene dentro de la aplicación de su departamento. Todos ven
+también las apps que son para todo el mundo: <i>Conversaciones, Calendario, Contactos, Tableros, Empleados</i> (solo el
+listado) y <i>Aplicaciones</i> (solo para pedir que se instale algo, ver I-11).</p>
 <table><tr><th>Usuario</th><th>Apps de negocio visibles</th><th>App revisada</th><th>Menús dentro de la app</th></tr>{filas}</table>
-{tab_pie("Resultado de la verificación: los Responsables ven «Informes» y «Configuración»; los Usuarios no.")}
+{tab_pie("Resultado: los responsables tienen «Informes» y «Configuración» y los usuarios normales no.")}
 <h2>9.1 Ventas: Ana García (Responsable) frente a Pedro López (Usuario)</h2>
 {par(fig("u2_ana_garcia_id.png", "Sesión iniciada como Ana García."), fig("u3_pedro_lopez_id.png", "Sesión iniciada como Pedro López."))}
-{par(fig("u2_ana_garcia_menu.png", "Apps de Ana: CRM y Ventas, sin Inventario, Compra ni Facturación."), fig("u3_pedro_lopez_menu.png", "Apps de Pedro: las mismas apps de negocio."))}
+{par(fig("u2_ana_garcia_menu.png", "Apps de Ana: CRM y Ventas, pero no Inventario, Compra ni Facturación."), fig("u3_pedro_lopez_menu.png", "Apps de Pedro: las mismas que Ana."))}
 {par(fig("u2_ana_garcia_app.png", "Ventas (Ana): con Informes y Configuración."), fig("u3_pedro_lopez_app.png", "Ventas (Pedro): sin Informes ni Configuración."))}
 <h2>9.2 Inventario: Javier Romero (Responsable) frente a Lucía Herrero (Usuario)</h2>
 {par(fig("u5_javier_romero_id.png", "Sesión iniciada como Javier Romero."), fig("u6_lucia_herrero_id.png", "Sesión iniciada como Lucía Herrero."))}
@@ -413,39 +415,39 @@ solicitar instalaciones, ver I-11).</p>
 <h2>9.4 Sofía Torres y Carlos Méndez</h2>
 {par(fig("u4_sofia_torres_menu.png", "Apps de Sofía Torres (Ventas/CRM Usuario)."), fig("u1_carlos_menu.png", "Apps de Carlos Méndez (Administrador): todas + Ajustes."))}
 <h2>9.5 Comprobación en el servidor (matriz de accesos)</h2>
-<p>Como verificación adicional se consultó al servidor, con las credenciales de cada usuario, si puede leer (L) o crear
-(C) en los modelos principales. Los accesos cruzados que aparecen son el diseño estándar de Odoo: al confirmar un
-pedido de venta se genera un albarán (inventario) y una factura, por eso un comercial necesita esos permisos
-técnicos aunque no vea los menús de esas apps. Ningún usuario salvo Carlos puede crear usuarios ni ver Empleados
-como gestor.</p>
-{fig("T10_terminal_matriz_accesos.png", "Matriz de accesos comprobada por XML-RPC con cada usuario (L = lectura, C = creación).")}
+<p>Además, con un pequeño script, entré con cada usuario y pregunté a Odoo si puede leer (L) o crear (C) datos de las
+partes principales. Algunos usuarios tienen acceso a cosas de otros departamentos, pero Odoo funciona así: cuando un
+comercial confirma un pedido se crea un albarán de almacén y una factura, así que necesita esos permisos aunque no vea
+esos menús. Solo Carlos puede crear usuarios y gestionar empleados.</p>
+{fig("T10_terminal_matriz_accesos.png", "Qué puede leer (L) y crear (C) cada usuario, comprobado entrando con su cuenta.")}
 """)
     # 10 ------------------------------------------------------------------
     s.append(f"""
 <h1>10. Copia de seguridad y restauración</h1>
-<p>Siguiendo la sección 2.8.2 se hace una copia <b>completa</b>: la base de datos (volcado SQL con
-<code>pg_dump</code>) y el <b>filestore</b> (adjuntos, imágenes y logotipo, guardados en
-<code>/var/lib/odoo/filestore/techparts</code>). Sin el filestore, al restaurar se perderían las imágenes y los
-adjuntos.</p>
-<h2>10.1 Método 1: línea de comandos (script backup.sh)</h2>
+<p>Siguiendo la sección 2.8.2 hice la copia de las dos partes: la base de datos (un fichero .sql sacado con
+<code>pg_dump</code>) y el <b>filestore</b>, que es donde Odoo guarda los archivos adjuntos, las imágenes y el logo
+(<code>/var/lib/odoo/filestore/techparts</code>). Si solo copias la base de datos, al restaurar pierdes las imágenes y
+los adjuntos.</p>
+<h2>10.1 Desde la terminal (script backup.sh)</h2>
 {cmd('''# Base de datos
 docker exec techparts_db pg_dump -U odoo -d techparts --no-owner --no-privileges > backup/techparts_AAAAMMDD_HHMM.sql
 # Filestore
 docker exec techparts_odoo tar -czf - -C /var/lib/odoo/filestore techparts > backup/filestore_techparts_AAAAMMDD_HHMM.tar.gz''')}
 {code(backup_sh)}
-<h2>10.2 Método 2: interfaz web</h2>
-<p><b>/web/database/manager → Backup</b>, con la contraseña maestra y el formato <i>zip (includes filestore)</i>.
-Genera un ZIP con <code>dump.sql</code>, <code>manifest.json</code> y la carpeta <code>filestore/</code>.
-Equivale a:</p>
+<h2>10.2 Desde la web</h2>
+<p>También hice la copia desde <b>/web/database/manager → Backup</b>, poniendo la contraseña maestra y el formato
+<i>zip (includes filestore)</i>. Te descarga un ZIP con <code>dump.sql</code>, <code>manifest.json</code> y la carpeta
+<code>filestore/</code>. Lo mismo se puede hacer con este comando:</p>
 {curl_web}
-{fig("T08_terminal_backup.png", "Ejecución de backup.sh, copia ZIP web y sumas SHA-256 de verificación.")}
+{fig("T08_terminal_backup.png", "Ejecución de backup.sh, copia en ZIP desde la web y las sumas SHA-256 para comprobar los ficheros.")}
 <h2>10.3 Prueba de restauración</h2>
-<p>Para demostrar que la copia es <b>restaurable</b>, se restauró en una base de datos nueva
-(<code>techparts_restore</code>) con <code>restore.sh</code>. Se comprobaron los 8 usuarios, los datos de la empresa,
-que no falta ningún fichero del filestore y el inicio de sesión de un usuario. Después se eliminó la base de prueba.</p>
+<p>Para asegurarme de que la copia funciona de verdad, la restauré en una base de datos nueva
+(<code>techparts_restore</code>) con <code>restore.sh</code>. Comprobé que estaban los 8 usuarios y los datos de la
+empresa, que no faltaba ningún archivo del filestore y que se podía iniciar sesión. Después borré esa base de datos de
+prueba.</p>
 {code(restore_sh)}
-{fig("T09_terminal_restauracion.png", "Restauración verificada: 8 usuarios, empresa, 0 ficheros perdidos y login correcto.")}
-<div class="ok">Ficheros entregados en <code>backup/</code>: <code>techparts_20260925_1003.sql</code> (≈ 24 MB),
+{fig("T09_terminal_restauracion.png", "La restauración funciona: están los 8 usuarios y la empresa, no falta ningún archivo y el login va bien.")}
+<div class="ok">Ficheros que entrego en <code>backup/</code>: <code>techparts_20260925_1003.sql</code> (≈ 24 MB),
 <code>filestore_techparts_20260925_1003.tar.gz</code> (≈ 3,4 MB), <code>techparts_web_20260925_1003.zip</code>
 (≈ 6,2 MB) y <code>SHA256SUMS_20260925_1003.txt</code>.</div>
 """)
@@ -454,37 +456,36 @@ que no falta ningún fichero del filestore y el inicio de sesión de un usuario.
                     for i in INCIDENCIAS)
     s.append(f"""
 <h1>11. Incidencias encontradas y resolución</h1>
-<p>Todas las incidencias se produjeron realmente durante la práctica. Para cada una se indica el síntoma (mensaje
-exacto), la causa diagnosticada y la solución aplicada.</p>
-<table class="inc"><colgroup><col style="width:7%"><col style="width:10%"><col style="width:26%"><col style="width:27%"><col style="width:30%"></colgroup><tr><th>ID</th><th>Fase</th><th>Síntoma</th><th>Causa</th><th>Solución</th></tr>{filas}</table>
+<p>Estos son los problemas que me fueron saliendo durante la práctica. En cada uno pongo el mensaje que me salió,
+por qué pasaba y cómo lo solucioné.</p>
+<table class="inc"><colgroup><col style="width:7%"><col style="width:10%"><col style="width:26%"><col style="width:27%"><col style="width:30%"></colgroup><tr><th>ID</th><th>Fase</th><th>Qué pasó</th><th>Por qué</th><th>Solución</th></tr>{filas}</table>
 {tab_pie("Registro de incidencias.")}
-{fig("T03b_terminal_error_429.png", "Incidencia I-02: límite de descargas de Docker Hub (429 Too Many Requests).")}
-{fig("inc_websocket_desconectado.png", "Incidencia I-07: «Se perdió la conexión en tiempo real» (abajo a la derecha) con workers = 2 y sin proxy inverso.", "85%")}
-<h2>11.1 Método de diagnóstico seguido</h2>
-<p>1) Leer el log (<code>docker compose logs odoo</code> y, una vez corregido, <code>logs/odoo.log</code>);
-2) localizar el parámetro o componente implicado (usuario del contenedor con <code>docker exec techparts_odoo id</code>,
-código de validación en <code>odoo/tools/config.py</code>, grupos con el modo desarrollador);
-3) aplicar el cambio mínimo; 4) reiniciar y volver a comprobar que el mensaje ha desaparecido.</p>
+{fig("T03b_terminal_error_429.png", "Incidencia I-02: Docker Hub no me dejaba descargar más veces (429 Too Many Requests).")}
+{fig("inc_websocket_desconectado.png", "Incidencia I-07: aviso de «Se perdió la conexión en tiempo real» abajo a la derecha.", "85%")}
+<h2>11.1 Cómo he ido resolviendo los problemas</h2>
+<p>Casi siempre he hecho lo mismo: primero mirar el log (<code>docker compose logs odoo</code> o
+<code>logs/odoo.log</code>), luego buscar qué parte fallaba (por ejemplo, con <code>docker exec techparts_odoo id</code>
+vi con qué usuario se ejecuta Odoo, y con el modo desarrollador vi los grupos de permisos), después cambiar solo lo
+necesario y, por último, reiniciar y comprobar que el error ya no sale.</p>
 """)
     # 12 ------------------------------------------------------------------
     s.append("""
 <h1>12. Conclusiones</h1>
-<p>Se ha desplegado Odoo 19 con Docker Compose de forma reproducible: basta con copiar la carpeta <code>proyecto/</code>
-y ejecutar <code>docker compose up -d</code>. La empresa TechParts S.L. queda configurada con sus datos fiscales, su
-logotipo y la localización española. Los 6 módulos están instalados y los 8 usuarios tienen permisos
-<b>verificados entrando con cada cuenta</b>: cada uno ve solo las aplicaciones de su departamento y, dentro de ellas,
-los Responsables disponen de Informes y Configuración, que los Usuarios no tienen.</p>
-<p>La copia de seguridad (BD + filestore) se ha <b>restaurado con éxito</b> en una base de datos nueva, con lo que se
-confirma que es completa. Las principales lecciones han sido: revisar el log tras el primer arranque, entender que
-el contenedor se ejecuta con un usuario sin privilegios (permisos de volúmenes), conocer la diferencia entre el modo
-multihilo y el modo <i>workers</i> (websocket) y saber que la interfaz de permisos de Odoo 19 no siempre muestra
-todos los niveles (grupos técnicos en modo desarrollador).</p>
-<h2>Mejoras propuestas para producción</h2>
+<p>He conseguido tener Odoo 19 funcionando con Docker Compose. Una ventaja es que, copiando la carpeta
+<code>proyecto/</code> y ejecutando <code>docker compose up -d</code>, se puede montar igual en otro ordenador. La
+empresa TechParts S.L. tiene todos sus datos, el logo y la contabilidad española, y están instalados los 6 módulos.
+He comprobado los permisos de los 8 usuarios <b>entrando con cada uno</b>: cada uno ve solo lo de su departamento y los
+responsables tienen Informes y Configuración, que los demás no tienen.</p>
+<p>La copia de seguridad (base de datos + filestore) la he restaurado en otra base de datos y funciona bien. Lo que más
+he aprendido: hay que mirar siempre el log después de arrancar; dentro del contenedor Odoo no es root, así que hay que
+dar permisos a las carpetas; con <i>workers</i> hace falta nginx para que funcione el chat en tiempo real; y en Odoo 19
+algunos permisos solo se ven con el modo desarrollador.</p>
+<h2>Qué mejoraría si fuera para una empresa de verdad</h2>
 <ul><li>Proxy inverso nginx con HTTPS, <code>proxy_mode = True</code> y <code>workers ≥ 2</code>.</li>
 <li><code>list_db = False</code> tras la puesta en marcha, para ocultar el gestor de bases de datos.</li>
 <li>Contraseñas en un fichero <code>.env</code> fuera del control de versiones.</li>
 <li>Copias automáticas con <code>cron</code> (<code>backup.sh</code> diario) guardadas fuera del servidor.</li>
-<li>Contraseñas más robustas y doble factor (TOTP) para el administrador.</li></ul>
+<li>Contraseñas más seguras y verificación en dos pasos para el administrador.</li></ul>
 """)
     # Anexos --------------------------------------------------------------
     s.append("""
@@ -510,14 +511,13 @@ docker compose up -d
 ./restore.sh ../backup/techparts_20260925_1003.sql ../backup/filestore_techparts_20260925_1003.tar.gz techparts
 # o bien: /web/database/manager → Restore → techparts_web_20260925_1003.zip
 # Acceso: http://localhost:8069  ·  carlos@techparts.es / Carlos2025!</pre>
-<h1 style="page-break-before:auto;margin-top:24px">Anexo B. Scripts de automatización</h1>
-<p>Además de hacer cada paso en la interfaz, la configuración se reforzó con scripts en Python que usan la API
-<b>XML-RPC</b> de Odoo (<code>/xmlrpc/2/object</code>). Así es repetible y se puede comprobar: datos de la empresa
-(<code>paso3_empresa.py</code>), instalación de módulos con <code>button_immediate_install</code>
-(<code>paso4_modulos.py</code>), creación de usuarios, departamentos y empleados (<code>paso6_usuarios.py</code>) y
-matriz de accesos (<code>paso9_matriz_accesos.py</code>). Las capturas del navegador se tomaron con Playwright
-(Chromium) iniciando sesión con cada usuario (<code>paso7_verificar_usuarios.py</code>). Las capturas de terminal
-reproducen la salida real de los comandos, guardada en <code>evidencias/</code>.</p>
+<h1 style="page-break-before:auto;margin-top:24px">Anexo B. Scripts que he usado</h1>
+<p>Para no tener que repetir todo a mano cada vez que probaba algo, hice unos scripts en Python que se conectan a
+Odoo por <b>XML-RPC</b>: uno para los datos de la empresa (<code>paso3_empresa.py</code>), otro para instalar los
+módulos (<code>paso4_modulos.py</code>), otro para crear los usuarios, departamentos y empleados
+(<code>paso6_usuarios.py</code>) y otro para comprobar los permisos (<code>paso9_matriz_accesos.py</code>). Las
+capturas del navegador las saqué con Playwright, entrando con cada usuario (<code>paso7_verificar_usuarios.py</code>).
+Las capturas de terminal son la salida de los comandos, que guardé en la carpeta <code>evidencias/</code>.</p>
 """)
     return "\n".join(s)
 
