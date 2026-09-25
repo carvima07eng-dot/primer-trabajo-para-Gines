@@ -1,0 +1,8 @@
+Carlos Méndez   carlos@techparts.es          -> Conversaciones, Calendario, Contactos, CRM, Ventas, Tableros, Facturación, Compra, Inventario, Empleados, Aplicaciones, Ajustes
+Ana García      ana.garcia@techparts.es      -> Conversaciones, Calendario, Contactos, CRM, Ventas, Tableros, Empleados, Aplicaciones
+Pedro López     pedro.lopez@techparts.es     -> Conversaciones, Calendario, Contactos, CRM, Ventas, Tableros, Empleados, Aplicaciones
+Sofía Torres    sofia.torres@techparts.es    -> Conversaciones, Calendario, Contactos, CRM, Ventas, Tableros, Empleados, Aplicaciones
+Javier Romero   javier.romero@techparts.es   -> Conversaciones, Calendario, Contactos, Tableros, Inventario, Empleados, Aplicaciones
+Lucía Herrero   lucia.herrero@techparts.es   -> Conversaciones, Calendario, Contactos, Tableros, Inventario, Empleados, Aplicaciones
+Elena Vidal     elena.vidal@techparts.es     -> Conversaciones, Calendario, Contactos, Tableros, Compra, Empleados, Aplicaciones
+Marcos Soler    marcos.soler@techparts.es    -> Conversaciones, Calendario, Contactos, Tableros, Facturación, Empleados, Aplicaciones

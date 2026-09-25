@@ -1,0 +1,11 @@
+Usuario         CRM          Ventas       Inventario   Compras      Facturación  Empleados    Usuarios     
+Carlos Méndez   L+C          L+C          L+C          L+C          L+C          L+C          L+C          
+Ana García      L+C          L+C          L+C          -            L            -            L            
+Pedro López     L+C          L+C          L+C          -            L            -            L            
+Sofía Torres    L+C          L+C          L+C          -            L            -            L            
+Javier Romero   -            L            L+C          L            -            -            L            
+Lucía Herrero   -            L            L+C          L            -            -            L            
+Elena Vidal     -            -            L+C          L+C          L+C          -            L            
+Marcos Soler    -            L            L+C          L            L+C          -            L            
+
+L = lectura, C = creación, - = sin acceso (AccessError)
