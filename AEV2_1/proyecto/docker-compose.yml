@@ -1,6 +1,7 @@
 services:
   db:
     image: postgres:16
+    pull_policy: missing
     container_name: techparts_db
     restart: unless-stopped
     environment:
@@ -18,6 +19,7 @@ services:
 
   odoo:
     image: odoo:19.0
+    pull_policy: missing
     container_name: techparts_odoo
     restart: unless-stopped
     depends_on:

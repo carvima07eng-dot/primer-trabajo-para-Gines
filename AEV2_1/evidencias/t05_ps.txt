@@ -1,0 +1,12 @@
+$ docker compose ps
+NAME             IMAGE         STATUS                    PORTS
+techparts_db     postgres:16   Up 20 seconds (healthy)   5432/tcp
+techparts_odoo   odoo:19.0     Up 10 seconds             0.0.0.0:8069->8069/tcp, 0.0.0.0:8072->8072/tcp, 8071/tcp
+$ curl -I http://localhost:8069/web/login
+HTTP/1.1 200 OK
+Server: Werkzeug/3.0.1 Python/3.12.3
+Date: Fri, 25 Sep 2026 09:48:40 GMT
+$ docker volume ls
+DRIVER    VOLUME NAME
+local     proyecto_odoo-db-data
+local     proyecto_odoo-web-data

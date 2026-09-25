@@ -1,0 +1,5 @@
+$ docker compose logs odoo | grep -E "WARNING|ERROR"
+2026-09-25 09:32:37,972 1 WARNING ? odoo.tools.config: missing --http-interface/http_interface, using 0.0.0.0 by default, will change to 127.0.0.1 in 20.0 
+2026-09-25 09:32:37,971 1 WARNING ? odoo.tools.config: option addons_path, invalid addons directory '/mnt/extra-addons', skipped 
+2026-09-25 09:32:37,971 1 WARNING ? odoo.tools.config: unknown option 'db_filter' in the config file at /etc/odoo/odoo.conf, option stored as-is, without parsing 
+ERROR: couldn't create the logfile directory. Logging to the standard output.

@@ -1,0 +1,23 @@
+$ mkdir -p proyecto/{config,addons,logs} backup
+$ find proyecto -maxdepth 2 | sort
+proyecto
+proyecto/addons
+proyecto/addons/.gitkeep
+proyecto/backup.sh
+proyecto/config
+proyecto/config/odoo.conf
+proyecto/docker-compose.yml
+proyecto/logo_techparts.png
+proyecto/logs
+proyecto/logs/.gitkeep
+proyecto/restore.sh
+
+$ chown 100:101 proyecto/logs && chmod 775 proyecto/logs   # uid/gid del usuario odoo del contenedor
+$ ls -ln proyecto
+drwxr-xr-x 2   0   0  4096 Sep 25 09:29 addons
+-rwxr-xr-x 1   0   0   766 Sep 25 09:46 backup.sh
+drwxr-xr-x 2   0   0  4096 Sep 25 09:39 config
+-rw-r--r-- 1   0   0   976 Sep 25 09:48 docker-compose.yml
+-rw-r--r-- 1   0   0 57738 Sep 25 09:35 logo_techparts.png
+drwxrwxr-x 2 100 101  4096 Sep 25 09:33 logs
+-rwxr-xr-x 1   0   0   790 Sep 25 09:46 restore.sh

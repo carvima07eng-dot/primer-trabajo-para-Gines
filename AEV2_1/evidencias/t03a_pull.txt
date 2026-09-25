@@ -1,0 +1,10 @@
+$ docker compose pull        # primera descarga (09:31)
+ Image postgres:16 Pulling
+ Image odoo:19.0 Pulling
+ ...
+ Image postgres:16 Pulled
+ Image odoo:19.0 Pulled
+$ docker images
+REPOSITORY   TAG       IMAGE ID       SIZE
+postgres     16        1a6ab3f5345e   642MB
+odoo         19.0      144175ec0039   3.29GB

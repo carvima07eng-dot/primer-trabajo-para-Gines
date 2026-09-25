@@ -1,0 +1,10 @@
+$ docker compose pull
+ Image postgres:16 Pulling 
+ Image odoo:19.0 Pulling 
+ Image odoo:19.0 Error unknown: failed to resolve reference "docker.io/library/odoo:19.0": unexpected status from HEAD request to https://registry-1.docker.io/v2/library/odoo/manifests/19.0: 429 Too Many Requests
+ Image postgres:16 Interrupted 
+Error response from daemon: unknown: failed to resolve reference "docker.io/library/odoo:19.0": unexpected status from HEAD request to https://registry-1.docker.io/v2/library/odoo/manifests/19.0: 429 Too Many Requests
+$ docker images
+REPOSITORY   TAG       SIZE
+postgres     16        642MB
+odoo         19.0      3.29GB
