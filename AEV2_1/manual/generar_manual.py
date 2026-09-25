@@ -88,7 +88,7 @@ INCIDENCIAS = [
      "<code>docker info</code> devuelve <i>failed to connect to the docker API at unix:///var/run/docker.sock</i>.",
      "El demonio de Docker no estaba arrancado.",
      "Arrancar el servicio: <code>sudo systemctl start docker</code> (y <code>enable</code> para el arranque automático). "
-     "Se comprueba con <code>docker info</code> (fig. T00)."),
+     "Se comprueba con <code>docker info</code> (figura 1)."),
     ("I-02", "Instalación",
      "Descarga de imágenes: <i>429 Too Many Requests</i> al repetir <code>docker compose pull</code>.",
      "Límite de descargas anónimas de Docker Hub.",
@@ -112,7 +112,7 @@ INCIDENCIAS = [
      "Odoo 19 ignora las rutas de addons que no contienen ningún módulo. La carpeta está vacía.",
      "Aviso informativo, sin impacto. Desaparecerá al copiar el primer módulo propio en <code>addons/</code>."),
     ("I-07", "Uso",
-     "Aviso en la esquina inferior: <i>Se perdió la conexión en tiempo real</i> (fig. de la incidencia).",
+     "Aviso en la esquina inferior: <i>Se perdió la conexión en tiempo real</i> (figura al final de esta sección).",
      "Con <code>workers = 2</code> (modo multiproceso) el websocket <code>/websocket</code> se sirve en el puerto 8072 "
      "(gevent). Sin proxy inverso, el navegador lo pide al 8069 y falla.",
      "Entorno de aula sin nginx: <code>workers = 0</code> (modo multihilo, todo por el 8069). En producción: mantener "
@@ -171,6 +171,9 @@ tr { page-break-inside: avoid; }
 th { background: #124a80; color: #fff; text-align: left; padding: 5px 6px; }
 td { border-bottom: 1px solid #d9dee6; padding: 4px 6px; vertical-align: top; }
 tr:nth-child(even) td { background: #f5f7fa; }
+table.inc { table-layout: fixed; }
+table.inc td:first-child { white-space: nowrap; }
+ul { margin: 4px 0 4px 18px; padding: 0; }
 .tabpie { font-size: 8.4pt; color: #555; text-align: center; margin-bottom: 12px; }
 .nota { background: #fff6e8; border-left: 4px solid #f58c1e; padding: 6px 10px; margin: 8px 0; font-size: 9pt; }
 .ok { background: #eaf7ef; border-left: 4px solid #2e9e5b; padding: 6px 10px; margin: 8px 0; font-size: 9pt; }
@@ -453,7 +456,7 @@ que no falta ningún fichero del filestore y el inicio de sesión de un usuario.
 <h1>11. Incidencias encontradas y resolución</h1>
 <p>Todas las incidencias se produjeron realmente durante la práctica. Para cada una se indica el síntoma (mensaje
 exacto), la causa diagnosticada y la solución aplicada.</p>
-<table><tr><th>ID</th><th>Fase</th><th>Síntoma</th><th>Causa</th><th>Solución</th></tr>{filas}</table>
+<table class="inc"><colgroup><col style="width:7%"><col style="width:10%"><col style="width:26%"><col style="width:27%"><col style="width:30%"></colgroup><tr><th>ID</th><th>Fase</th><th>Síntoma</th><th>Causa</th><th>Solución</th></tr>{filas}</table>
 {tab_pie("Registro de incidencias.")}
 {fig("T03b_terminal_error_429.png", "Incidencia I-02: límite de descargas de Docker Hub (429 Too Many Requests).")}
 {fig("inc_websocket_desconectado.png", "Incidencia I-07: «Se perdió la conexión en tiempo real» (abajo a la derecha) con workers = 2 y sin proxy inverso.", "85%")}
@@ -477,11 +480,11 @@ el contenedor se ejecuta con un usuario sin privilegios (permisos de volúmenes)
 multihilo y el modo <i>workers</i> (websocket) y saber que la interfaz de permisos de Odoo 19 no siempre muestra
 todos los niveles (grupos técnicos en modo desarrollador).</p>
 <h2>Mejoras propuestas para producción</h2>
-<p>• Proxy inverso nginx con HTTPS, <code>proxy_mode = True</code> y <code>workers ≥ 2</code>.
-• <code>list_db = False</code> tras la puesta en marcha, para ocultar el gestor de bases de datos.
-• Contraseñas en un fichero <code>.env</code> fuera del control de versiones.
-• Copias automáticas con <code>cron</code> (<code>backup.sh</code> diario) guardadas fuera del servidor.
-• Contraseñas más robustas y doble factor (TOTP) para el administrador.</p>
+<ul><li>Proxy inverso nginx con HTTPS, <code>proxy_mode = True</code> y <code>workers ≥ 2</code>.</li>
+<li><code>list_db = False</code> tras la puesta en marcha, para ocultar el gestor de bases de datos.</li>
+<li>Contraseñas en un fichero <code>.env</code> fuera del control de versiones.</li>
+<li>Copias automáticas con <code>cron</code> (<code>backup.sh</code> diario) guardadas fuera del servidor.</li>
+<li>Contraseñas más robustas y doble factor (TOTP) para el administrador.</li></ul>
 """)
     # Anexos --------------------------------------------------------------
     s.append("""
