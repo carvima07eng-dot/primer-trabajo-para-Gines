@@ -7,18 +7,18 @@ import re
 from playwright.sync_api import sync_playwright
 
 CAPTURAS = {
-    "t00_docker_daemon.txt": ("T00_terminal_docker_daemon.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo"),
-    "t01_versiones.txt": ("T01_terminal_versiones.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo"),
-    "t02_estructura.txt": ("T02_terminal_estructura.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/AEV2_1"),
-    "t03a_pull.txt": ("T03_terminal_pull.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t03b_pull_error_429.txt": ("T03b_terminal_error_429.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t04_up.txt": ("T04_terminal_up.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t05_ps.txt": ("T05_terminal_ps.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t06_errores_arranque.txt": ("T06_terminal_errores_arranque.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t07_odoo_conf.txt": ("T07_terminal_odoo_conf.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "t08_backup.txt": ("T08_terminal_backup.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "salida_restauracion.txt": ("T09_terminal_restauracion.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/techparts-odoo/proyecto"),
-    "matriz_accesos.txt": ("T10_terminal_matriz_accesos.png", "carlos.vidal@dam2 (Carlos Vidal Marín): ~/AEV2_1/scripts"),
+    "t00_docker_daemon.txt": ("T00_terminal_docker_daemon.png", "carlos@dam2: ~/techparts-odoo"),
+    "t01_versiones.txt": ("T01_terminal_versiones.png", "carlos@dam2: ~/techparts-odoo"),
+    "t02_estructura.txt": ("T02_terminal_estructura.png", "carlos@dam2: ~/AEV2_1"),
+    "t03a_pull.txt": ("T03_terminal_pull.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t03b_pull_error_429.txt": ("T03b_terminal_error_429.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t04_up.txt": ("T04_terminal_up.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t05_ps.txt": ("T05_terminal_ps.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t06_errores_arranque.txt": ("T06_terminal_errores_arranque.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t07_odoo_conf.txt": ("T07_terminal_odoo_conf.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "t08_backup.txt": ("T08_terminal_backup.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "salida_restauracion.txt": ("T09_terminal_restauracion.png", "carlos@dam2: ~/techparts-odoo/proyecto"),
+    "matriz_accesos.txt": ("T10_terminal_matriz_accesos.png", "carlos@dam2: ~/AEV2_1/scripts"),
 }
 
 CSS = """

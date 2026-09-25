@@ -282,7 +282,7 @@ sudo chown 100:101 logs && chmod 775 logs   # usuario odoo del contenedor (ver I
 <tr><td><code>config/odoo.conf</code></td><td>Configuración del servidor Odoo</td><td><code>/etc/odoo</code></td></tr>
 <tr><td><code>addons/</code></td><td>Para módulos propios (de momento está vacía)</td><td><code>/mnt/extra-addons</code></td></tr>
 <tr><td><code>logs/</code></td><td>Fichero <code>odoo.log</code></td><td><code>/var/log/odoo</code></td></tr>
-<tr><td><code>backup.sh</code> / <code>restore.sh</code></td><td>Scripts de copia y restauración (sección 10)</td><td>—</td></tr></table>
+</table>
 {tab_pie("Carpetas del proyecto.")}
 {fig("T02_terminal_estructura.png", "Carpetas creadas y permisos de la carpeta logs (100:101 es el usuario odoo del contenedor).")}
 <h2>3.2 docker-compose.yml</h2>
@@ -447,9 +447,8 @@ empresa, que no faltaba ningún archivo del filestore y que se podía iniciar se
 prueba.</p>
 {code(restore_sh)}
 {fig("T09_terminal_restauracion.png", "La restauración funciona: están los 8 usuarios y la empresa, no falta ningún archivo y el login va bien.")}
-<div class="ok">Ficheros que entrego en <code>backup/</code>: <code>techparts_20260925_1003.sql</code> (≈ 24 MB),
-<code>filestore_techparts_20260925_1003.tar.gz</code> (≈ 3,4 MB), <code>techparts_web_20260925_1003.zip</code>
-(≈ 6,2 MB) y <code>SHA256SUMS_20260925_1003.txt</code>.</div>
+<div class="ok">En la carpeta <code>backup/</code> del ZIP entrego la base de datos
+(<code>techparts_20260925_1003.sql</code>) y el filestore (<code>filestore_techparts_20260925_1003.tar.gz</code>).</div>
 """)
     # 11 ------------------------------------------------------------------
     filas = "".join(f"<tr><td><b>{i[0]}</b></td><td>{i[1]}</td><td>{i[2]}</td><td>{i[3]}</td><td>{i[4]}</td></tr>"
@@ -494,23 +493,21 @@ algunos permisos solo se ven con el modo desarrollador.</p>
 ├── proyecto/
 │   ├── docker-compose.yml
 │   ├── config/odoo.conf
-│   ├── addons/                 (vacía, para módulos propios)
-│   ├── logs/                   (odoo.log)
-│   ├── backup.sh  ·  restore.sh
-│   └── logo_techparts.png
+│   ├── addons/
+│   └── logs/
 ├── backup/
 │   ├── techparts_20260925_1003.sql
-│   ├── filestore_techparts_20260925_1003.tar.gz
-│   ├── techparts_web_20260925_1003.zip
-│   └── SHA256SUMS_20260925_1003.txt
+│   └── filestore_techparts_20260925_1003.tar.gz
 └── Manual_Instalacion_TechParts.pdf</pre>
 <h2>Restaurar el entorno en otro equipo</h2>
 <pre class='cmd'>cd proyecto
 sudo chown 100:101 logs
 docker compose up -d
-./restore.sh ../backup/techparts_20260925_1003.sql ../backup/filestore_techparts_20260925_1003.tar.gz techparts
-# o bien: /web/database/manager → Restore → techparts_web_20260925_1003.zip
-# Acceso: http://localhost:8069  ·  carlos@techparts.es / Carlos2025!</pre>
+docker exec techparts_db createdb -U odoo techparts
+docker exec -i techparts_db psql -U odoo -d techparts < ../backup/techparts_20260925_1003.sql
+docker exec -i -u root techparts_odoo bash -c "mkdir -p /var/lib/odoo/filestore && tar -xzf - -C /var/lib/odoo/filestore && chown -R odoo: /var/lib/odoo/filestore" < ../backup/filestore_techparts_20260925_1003.tar.gz
+docker compose restart odoo
+# Entrar en http://localhost:8069 con carlos@techparts.es / Carlos2025!</pre>
 <h1 style="page-break-before:auto;margin-top:24px">Anexo B. Scripts que he usado</h1>
 <p>Para no tener que repetir todo a mano cada vez que probaba algo, hice unos scripts en Python que se conectan a
 Odoo por <b>XML-RPC</b>: uno para los datos de la empresa (<code>paso3_empresa.py</code>), otro para instalar los
