@@ -1,0 +1,19 @@
+Wireframes - Rediseño web Ajuntament d'Alzira (alzira.es)
+Carlos Vidal Marín - 2º DAM - Desarrollo de Interfaces, Unidad 1
+
+Herramienta: los wireframes están hechos con HTML + CSS (media fidelidad).
+Los archivos de la carpeta fuente son los editables: se abren con cualquier navegador
+y se modifican con cualquier editor de código.
+
+imagenes/  -> wireframes exportados en PNG (Desktop, Mobile, Tablet y lámina de paleta/tipografía)
+fuente/    -> archivos fuente editables (HTML + CSS)
+
+desktop.html     -> 1920x1080
+mobile.html      -> 375x667 (inicio)
+mobile_cita.html -> 375x667 (cita previa, paso 2 de 3)
+tablet.html      -> 1024x768 / 768x1024 (redimensionar la ventana para ver los dos modos)
+paleta.html      -> paleta de colores y escala tipográfica
+
+Los colores y tamaños están definidos como variables en wf.css.
+Las anotaciones (círculos rosas numerados y recuadros discontinuos) las dibuja annot.js;
+no forman parte del diseño. La explicación de cada número está en la memoria (apartado 4).

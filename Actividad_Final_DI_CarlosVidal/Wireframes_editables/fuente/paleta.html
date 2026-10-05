@@ -1,0 +1,29 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Paleta y tipografía</title><link rel="stylesheet" href="wf.css">
+<style>body{width:1200px;height:760px;padding:28px 36px;background:#fff}
+.sw{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:14px}
+.s{border:1px solid var(--linea);border-radius:10px;overflow:hidden}
+.c{height:84px;display:flex;align-items:flex-end;padding:10px 12px;font-weight:700;font-size:18px}
+.m{padding:10px 12px;font-size:14px;line-height:1.4}
+.ok{color:var(--verde);font-weight:700}
+.ty{display:grid;grid-template-columns:150px 1fr 220px;align-items:baseline;border-bottom:1px solid var(--linea);padding:6px 0}
+.ty .small{font-size:13px}
+</style></head><body>
+<div class="h4">Paleta accesible propuesta (contraste medido según WCAG 2.1)</div>
+<div class="sw">
+<div class="s"><div class="c" style="background:#0B4F8A;color:#fff">Aa #0B4F8A</div><div class="m"><b>Azul institucional</b><br>Botones, menú, enlaces<br>Blanco sobre azul: <span class="ok">8,40:1 AAA</span></div></div>
+<div class="s"><div class="c" style="background:#1F2933;color:#fff">Aa #1F2933</div><div class="m"><b>Texto principal</b><br>Sobre blanco: <span class="ok">14,76:1 AAA</span><br>Sobre #F4F6F8: <span class="ok">13,62:1</span></div></div>
+<div class="s"><div class="c" style="background:#52606D;color:#fff">Aa #52606D</div><div class="m"><b>Texto secundario</b><br>Sobre blanco: <span class="ok">6,46:1 AA</span><br>Sobre #F4F6F8: <span class="ok">5,96:1 AA</span></div></div>
+<div class="s"><div class="c" style="background:#F4F6F8;color:#1F2933;border-bottom:1px solid var(--linea)">#F4F6F8</div><div class="m"><b>Fondo de secciones</b><br>Separa bloques sin líneas<br>(proximidad / Gestalt)</div></div>
+<div class="s"><div class="c" style="background:#FFF4E0;color:#8A5300">Aa #8A5300 / #FFF4E0</div><div class="m"><b>Avisos (meteo, cortes)</b><br>Texto sobre fondo ámbar: <span class="ok">5,81:1 AA</span></div></div>
+<div class="s"><div class="c" style="background:#B3261E;color:#fff">Aa #B3261E</div><div class="m"><b>Error / urgencia</b><br>Sobre blanco: <span class="ok">6,54:1 AA</span></div></div>
+<div class="s"><div class="c" style="background:#1E6B3A;color:#fff">Aa #1E6B3A</div><div class="m"><b>Confirmación</b><br>Sobre blanco: <span class="ok">6,52:1 AA</span></div></div>
+<div class="s"><div class="c" style="background:#fff;color:#1F2933"><span style="border:2px solid #7B8794;border-radius:6px;padding:4px 10px;font-size:15px">#7B8794</span></div><div class="m"><b>Borde de campos</b><br>Sobre blanco: <span class="ok">3,66:1</span> (mín. 3:1 componentes)</div></div>
+</div>
+<div class="h4" style="margin-top:22px">Escala tipográfica · Inter · ratio 1,25 (tercera mayor) · base 16 px</div>
+<div class="ty"><span class="small">H1 · 39 px Bold</span><span style="font-size:39px;font-weight:700;line-height:1.2">Trámites</span><span class="small">móvil 31 px · interlineado 1,2</span></div>
+<div class="ty"><span class="small">H2 · 31 px Bold</span><span style="font-size:31px;font-weight:700">Cita previa</span><span class="small">móvil 25 px</span></div>
+<div class="ty"><span class="small">H3 · 25 px Bold</span><span style="font-size:25px;font-weight:700">Trámites más usados</span><span class="small">móvil 20 px</span></div>
+<div class="ty"><span class="small">H4 · 20 px SemiBold</span><span style="font-size:20px;font-weight:600">Noticias</span><span class="small">títulos de tarjeta</span></div>
+<div class="ty"><span class="small">Cuerpo · 16 px Regular</span><span style="font-size:16px">Documento que acredita que vives en Alzira.</span><span class="small">interlineado 1,5 · máx. 70 caracteres</span></div>
+<div class="ty" style="border:0"><span class="small">Pequeño · 14 px</span><span style="font-size:14px;color:#52606D">3 oct · Medio ambiente</span><span class="small">nunca menos de 14 px</span></div>
+</body></html>

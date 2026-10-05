@@ -1,0 +1,43 @@
+/* Wireframes rediseño web Ajuntament d'Alzira — Carlos Vidal Marín, 2º DAM
+   Paleta accesible (WCAG 2.1 AA) y escala tipográfica 1.25 (base 16 px) */
+:root{
+  --azul:#0B4F8A;      /* primario: botones, enlaces, cabecera  8,40:1 sobre blanco */
+  --texto:#1F2933;     /* texto principal 14,76:1 */
+  --texto2:#52606D;    /* texto secundario 6,46:1 */
+  --fondo:#F4F6F8;     /* fondo de secciones */
+  --blanco:#FFFFFF;
+  --rojo:#B3261E;      /* errores / urgencias 6,54:1 */
+  --verde:#1E6B3A;     /* confirmaciones 6,52:1 */
+  --ambar-bg:#FFF4E0;  /* fondo de avisos */
+  --ambar-tx:#8A5300;  /* texto de avisos 5,81:1 sobre ámbar */
+  --borde:#7B8794;     /* bordes de campos 3,66:1 (componentes >= 3:1) */
+  --linea:#D9DEE4;     /* separadores decorativos */
+  --img:#E3E7EC;       /* marcador de imagen */
+  --anota:#D6336C;     /* SOLO anotaciones del wireframe, no es parte del diseño */
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Inter,"Inter Variable",Arial,sans-serif;color:var(--texto);background:var(--blanco);font-size:16px;line-height:1.5;position:relative;overflow:hidden}
+.h1{font-size:39px;line-height:1.2;font-weight:700}
+.h2{font-size:31px;line-height:1.25;font-weight:700}
+.h3{font-size:25px;line-height:1.3;font-weight:700}
+.h4{font-size:20px;line-height:1.35;font-weight:600}
+.small{font-size:14px;color:var(--texto2)}
+.sec{color:var(--texto2)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--azul);color:#fff;font-weight:600;border-radius:8px;min-height:48px;padding:0 20px;font-size:16px}
+.btn.out{background:#fff;color:var(--azul);border:2px solid var(--azul)}
+.img{background:var(--img);position:relative;border-radius:6px;overflow:hidden}
+.img::before,.img::after{content:"";position:absolute;left:0;top:0;width:141%;height:1px;background:#C3CAD3;transform-origin:0 0}
+.img::before{transform:rotate(var(--a,30deg))}
+.img::after{top:auto;bottom:0;transform:rotate(calc(-1*var(--a,30deg)))}
+.input{border:2px solid var(--borde);border-radius:8px;min-height:48px;display:flex;align-items:center;padding:0 14px;color:var(--texto2);background:#fff}
+.kbd{font-family:"DejaVu Sans Mono",monospace;font-size:13px;border:1px solid var(--borde);border-bottom-width:2px;border-radius:4px;padding:0 6px;color:var(--texto);background:#fff}
+.ico{width:28px;height:28px;border:2px solid var(--azul);border-radius:7px;display:inline-block;flex:none}
+.ico.r{border-radius:50%}
+.card{background:#fff;border:1px solid var(--linea);border-radius:10px}
+.alert{background:var(--ambar-bg);color:var(--ambar-tx);border-left:6px solid var(--ambar-tx);font-weight:600}
+.focus{outline:3px solid var(--azul);outline-offset:3px}
+.line{height:10px;background:var(--linea);border-radius:5px}
+/* anotaciones */
+.co{position:absolute;width:34px;height:34px;border-radius:50%;background:var(--anota);color:#fff;font-weight:800;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 3px #fff;z-index:50}
+.co.s{width:26px;height:26px;font-size:13px;box-shadow:0 0 0 2px #fff}
+.box{position:absolute;border:3px dashed var(--anota);border-radius:8px;z-index:40;pointer-events:none}

@@ -1,0 +1,113 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Wireframe Desktop 1920x1080 — Alzira</title>
+<link rel="stylesheet" href="wf.css">
+<style>
+body{width:1920px;height:1080px;background:var(--fondo)}
+.wrap{width:1680px;margin:0 auto}
+header{background:#fff;border-bottom:1px solid var(--linea)}
+.top{display:flex;align-items:center;gap:40px;height:96px}
+.logo{display:flex;align-items:center;gap:14px;width:300px}
+.logo .esc{width:52px;height:60px;border:2px solid var(--texto);border-radius:4px 4px 26px 26px}
+.search{flex:1;display:flex;gap:0}
+.search .input{flex:1;border-radius:8px 0 0 8px;font-size:17px;height:56px}
+.search .btn{border-radius:0 8px 8px 0;height:56px}
+.util{display:flex;align-items:center;gap:18px}
+nav{background:var(--azul)}
+nav .wrap{display:flex;gap:6px;height:56px;align-items:stretch}
+nav a{color:#fff;font-weight:600;font-size:17px;display:flex;align-items:center;padding:0 22px;gap:8px}
+nav a.on{background:rgba(255,255,255,.14);box-shadow:inset 0 -4px 0 #fff}
+.crumb{font-size:14px;color:var(--texto2);padding:10px 0}
+.alert{display:flex;align-items:center;gap:14px;padding:12px 18px;border-radius:6px;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:20px;align-items:start}
+footer{position:absolute;left:0;right:0;bottom:0;height:150px;background:var(--texto);color:#fff}
+footer .wrap{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1.6fr;gap:24px;padding-top:22px;font-size:14px}
+footer b{display:block;font-size:15px;margin-bottom:6px}
+footer span{display:block;color:#E4E7EB}
+footer .kb span{display:inline!important;color:var(--texto)!important}
+footer .kb .kbd{display:inline-block!important}
+.tareas{grid-column:span 3}
+.tg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:12px}
+.t{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:18px;display:flex;gap:14px;align-items:flex-start;min-height:118px}
+.t b{display:block;font-size:17px}
+.t span{font-size:14px;color:var(--texto2)}
+.cita{padding:22px;display:flex;flex-direction:column;gap:12px}
+.cols{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;margin-top:24px}
+.col{padding:20px}
+.col h3{font-size:20px;margin-bottom:12px;display:flex;justify-content:space-between;align-items:baseline}
+.col h3 a{font-size:14px;color:var(--azul);font-weight:600;text-decoration:underline}
+.news{display:flex;gap:14px;margin-bottom:14px}
+.news .img{width:110px;height:74px;flex:none}
+.ev{display:flex;gap:14px;margin-bottom:12px;align-items:center}
+.date{width:54px;height:58px;border-radius:8px;background:var(--fondo);display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:700;line-height:1.1;flex:none;border:1px solid var(--linea)}
+.date small{font-size:12px;font-weight:600;color:var(--texto2)}
+.row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--linea)}
+.skip{position:absolute;left:16px;top:8px;background:var(--texto);color:#fff;font-size:14px;padding:6px 12px;border-radius:6px;z-index:60}
+.kb{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:10px 16px;font-size:14px;display:flex;gap:16px;align-items:center;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+.label{position:absolute;left:16px;bottom:6px;color:#C9D2DC!important;font-size:13px;color:var(--texto2);font-weight:600}
+</style></head><body>
+<header>
+ <div class="wrap top">
+  <div class="logo"><div class="esc"></div><div><b style="font-size:20px">Ajuntament d'Alzira</b><div class="small">Ayuntamiento de Alzira</div></div></div>
+  <div class="search" data-co="2"><div class="input">¿Qué necesitas hacer? Ej.: empadronarme, pagar el IBI, farmacia de guardia…&nbsp;&nbsp;<span class="kbd">/</span></div><div class="btn">Buscar</div></div>
+  <div class="util"><span style="font-weight:600">VAL | <u>ES</u></span><div class="btn out">Accesibilidad</div><div class="btn" data-co="3" data-cp="tr">Sede electrónica · Entrar</div></div>
+ </div>
+ <nav><div class="wrap" data-co="4" data-nobox>
+  <a class="on">Trámites y cita previa ▾</a><a>Vivir en Alzira ▾</a><a>Ayuntamiento ▾</a><a>Noticias y agenda ▾</a><a>Contacto</a>
+ </div></nav>
+</header>
+<main class="wrap">
+ <div class="crumb" style="display:flex;justify-content:space-between;align-items:center"><span>Inicio</span><span class="skip focus" data-co="1" data-cp="tr" data-nobox style="position:static">Saltar al contenido principal (visible al pulsar Tab)</span></div>
+ <div class="alert" data-co="5"><span class="ico r" style="border-color:var(--ambar-tx)"></span>Aviso meteorológico activo: nivel amarillo por lluvias. Consulta las recomendaciones de Protección Civil<span style="margin-left:auto;text-decoration:underline">Ver aviso completo</span></div>
+ <div class="grid">
+  <section class="tareas" data-co="6" data-pad="10">
+   <div class="h3">Trámites más usados</div>
+   <div class="tg">
+    <div class="t"><span class="ico"></span><div><b>Pedir cita previa</b><span>Oficina La Clau, Recaudación, departamentos</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Pagar tributos e impuestos</b><span>IBI, vehículos, basuras · calendario</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Padrón y certificados</b><span>Alta, cambio de domicilio, volante</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Instancia general</b><span>Presentar un escrito al Ayuntamiento</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Avisar de una incidencia</b><span>Farolas, baches, limpieza</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Farmacias de guardia</b><span>Hoy y esta semana</span></div></div>
+    <div class="t"><span class="ico"></span><div><b>Ayudas y subvenciones</b><span>Abiertas ahora</span></div></div>
+    <div class="t" style="background:var(--fondo)"><span class="ico"></span><div><b style="color:var(--azul)">Ver todos los trámites</b><span>Ordenados por temas (A–Z)</span></div></div>
+   </div>
+  </section>
+  <aside class="card cita" data-co="7" data-cp="tr">
+   <div class="h4">Cita previa en un solo sitio</div>
+   <div class="small">Elige el servicio y te enseñamos los huecos libres.</div>
+   <div class="input">Servicio ▾  (La Clau, Recaudación…)</div>
+   <div class="input">Fecha preferida 📅</div>
+   <div class="btn" style="width:100%">Ver horas disponibles</div>
+   <div class="small">¿Prefieres llamar? 96 240 04 50</div>
+  </aside>
+ </div>
+ <div class="cols" data-co="8">
+  <section class="card col"><h3>Noticias <a>Ver todas</a></h3>
+   <div class="news"><div class="img"></div><div><b>Titular de la noticia en dos líneas como máximo</b><div class="small">3 oct · Medio ambiente</div></div></div>
+   <div class="news"><div class="img"></div><div><b>Titular de la noticia en dos líneas como máximo</b><div class="small">2 oct · Cultura</div></div></div>
+  </section>
+  <section class="card col"><h3>Agenda <a>Ver agenda</a></h3>
+   <div class="ev"><div class="date">08<small>OCT</small></div><div><b>Nombre del evento</b><div class="small">Gran Teatre · 19:00</div></div></div>
+   <div class="ev"><div class="date">09<small>OCT</small></div><div><b>Nombre del evento</b><div class="small">Plaça Major · 12:00</div></div></div>
+  </section>
+  <section class="card col"><h3>Hoy en Alzira</h3>
+   <div class="row"><span>Farmacia de guardia</span><b>Nombre · calle</b></div>
+   <div class="row"><span>Tiempo</span><b>24 °C · lluvia</b></div>
+   <div class="row" style="border:0"><span>Emergencias</span><b>112 · Policía 092</b></div>
+  </section>
+  <section class="card col"><h3>Ciudad <a>Ver más</a></h3>
+   <div class="row"><span>Turismo y fiestas</span><span>›</span></div>
+   <div class="row"><span>Comercio local</span><span>›</span></div>
+   <div class="row" style="border:0"><span>Biblioteca y cultura</span><span>›</span></div>
+  </section>
+ </div>
+</main>
+<footer><div class="wrap">
+ <div><b>Ajuntament d'Alzira</b><span>C/ Sant Roc, 6 · 46600 Alzira</span><span>96 240 04 50 · ajuntament@alzira.es</span></div>
+ <div><b>Trámites</b><span>Sede electrónica</span><span>Cita previa</span><span>Pagos</span></div>
+ <div><b>Ayuntamiento</b><span>Transparencia</span><span>Plenos y VídeoActa</span><span>Perfil del contratante</span></div>
+ <div><b>Ayuda</b><span>Mapa web</span><span>Accesibilidad</span><span>Aviso legal</span></div>
+ <div class="kb" data-co="9" data-cp="tr" style="background:#fff;color:var(--texto);border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:6px;height:fit-content"><b style="font-size:15px;margin:0">Atajos de teclado</b><div style="display:flex;gap:14px;flex-wrap:wrap"><span style="display:inline;color:var(--texto)"><span class="kbd">/</span> buscar</span><span style="display:inline;color:var(--texto)"><span class="kbd">Alt</span>+<span class="kbd">C</span> cita</span><span style="display:inline;color:var(--texto)"><span class="kbd">Alt</span>+<span class="kbd">0</span> accesibilidad</span></div></div>
+</div><div class="label">Wireframe Desktop · 1920×1080</div></footer>
+
+<script src="annot.js"></script>
+</body></html>

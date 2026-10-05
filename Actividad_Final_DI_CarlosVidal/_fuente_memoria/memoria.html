@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Memoria técnica · Rediseño web Ajuntament d'Alzira</title>
+<style>
+@font-face{font-family:Inter;font-weight:400;src:url(img/inter-latin-400-normal.woff2)}
+@font-face{font-family:Inter;font-weight:600;src:url(img/inter-latin-600-normal.woff2)}
+@font-face{font-family:Inter;font-weight:700;src:url(img/inter-latin-700-normal.woff2)}
+@font-face{font-family:Inter;font-weight:800;src:url(img/inter-latin-800-normal.woff2)}
+@page{size:A4;margin:18mm 18mm 20mm 18mm}
+:root{--azul:#0B4F8A;--texto:#1F2933;--texto2:#52606D;--fondo:#F4F6F8;--linea:#D9DEE4;--anota:#D6336C}
+*{box-sizing:border-box}
+html{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+body{font-family:Inter,Arial,sans-serif;color:var(--texto);font-size:10pt;line-height:1.45;margin:0;background:#fff}
+.page{break-after:page}
+.page:last-child{break-after:auto}
+h1{font-size:20pt;line-height:1.2;margin:0 0 4mm;color:var(--azul)}
+h2{font-size:14pt;margin:6mm 0 2.5mm;line-height:1.25}
+h3{font-size:11.5pt;margin:4mm 0 1.5mm}
+p{margin:0 0 2.2mm;text-align:justify;hyphens:auto}
+.sec{color:var(--texto2)}
+.small{font-size:8.8pt;color:var(--texto2)}
+figure{margin:3mm 0 4mm;text-align:center}
+figure img{max-width:100%;border:1px solid var(--linea);border-radius:4px}
+figcaption{font-size:8.6pt;color:var(--texto2);margin-top:1.5mm}
+table{border-collapse:collapse;width:100%;font-size:8.8pt;line-height:1.3;margin:2mm 0 3mm}
+th{background:var(--azul);color:#fff;text-align:left;padding:4px 6px;font-weight:600}
+td{border-bottom:1px solid var(--linea);padding:4px 6px;vertical-align:top}
+tr:nth-child(even) td{background:#F8F9FB}
+.n{display:inline-flex;width:17px;height:17px;border-radius:50%;background:var(--anota);color:#fff;font-weight:800;font-size:8pt;align-items:center;justify-content:center;flex:none}
+.sev{display:inline-block;min-width:20px;text-align:center;font-weight:700;border-radius:4px;padding:0 5px;color:#fff}
+.s3{background:#B3261E}.s2{background:#8A5300}.s4{background:#5E0F0A}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;border:1px solid #9AA5B1;margin-right:4px}
+.callouts{display:grid;grid-template-columns:1fr 1fr;gap:1.2mm 6mm;font-size:8.8pt;line-height:1.35}
+.callouts div{display:flex;gap:6px;align-items:flex-start}
+.prob{border:1px solid var(--linea);border-left:5px solid var(--azul);border-radius:4px;padding:2.5mm 3.5mm;margin:0 0 3mm;break-inside:avoid}
+.prob h3{margin:0 0 1.5mm}
+.prob .meta{font-size:8.8pt;color:var(--texto2);margin-bottom:1.5mm}
+.prob p{margin-bottom:1.5mm}
+.shot{border:2px dashed #9AA5B1;border-radius:6px;background:var(--fondo);color:var(--texto2);display:flex;align-items:center;justify-content:center;text-align:center;font-size:9pt;padding:4mm}
+.pend{background:#FFF4E0;color:#8A5300;font-weight:600;padding:0 3px}
+/* portada */
+.cover{height:257mm;display:flex;flex-direction:column;justify-content:space-between}
+.cover .band{background:var(--azul);color:#fff;border-radius:6px;padding:16mm 12mm}
+.cover .band .k{font-size:10pt;letter-spacing:.08em;text-transform:uppercase;opacity:.9}
+.cover .band .t{font-size:28pt;font-weight:800;line-height:1.12;margin:5mm 0 4mm}
+.cover .band .st{font-size:13pt}
+.cover .img{margin:8mm 0;text-align:center}
+.cover .img img{width:100%;border:1px solid var(--linea);border-radius:4px}
+.cover dl{display:grid;grid-template-columns:42mm 1fr;gap:2mm 4mm;font-size:11pt;margin:0}
+.cover dt{color:var(--texto2)}
+.cover dd{margin:0;font-weight:600}
+.toc{font-size:10.5pt}
+.toc div{display:flex;border-bottom:1px dotted #C3CAD3;padding:1.6mm 0}
+.toc div span:first-child{flex:1}
+.toc .sub{padding-left:6mm;color:var(--texto2);font-size:9.8pt}
+.kv{display:grid;grid-template-columns:1fr 1fr;gap:4mm}
+.box{background:var(--fondo);border-radius:6px;padding:3mm 4mm}
+</style>
+</head>
+<body>
+
+<!-- ============ PORTADA ============ -->
+<section class="page cover">
+ <div class="band">
+  <div class="k">Actividad final integradora · Unidad 1</div>
+  <div class="t">Auditoría UX y rediseño multiplataforma de la web del Ajuntament d'Alzira</div>
+  <div class="st">Memoria técnica · alzira.es y su sede electrónica</div>
+ </div>
+ <div class="img"><img src="img/wf_desktop.png" alt="Wireframe desktop del rediseño"></div>
+ <dl>
+  <dt>Alumno</dt><dd>Carlos Vidal Marín</dd>
+  <dt>Ciclo formativo</dt><dd>2.º DAM · Desarrollo de Aplicaciones Multiplataforma</dd>
+  <dt>Módulo</dt><dd>Desarrollo de Interfaces</dd>
+  <dt>Centro</dt><dd>Florida Campus Alzira</dd>
+  <dt>Entrega</dt><dd>Octubre de 2026</dd>
+ </dl>
+</section>
+
+<!-- ============ ÍNDICE + INTRO ============ -->
+<section class="page">
+ <h1>Índice</h1>
+ <div class="toc">
+  <div><span>1. Introducción y elección del caso</span><span>2</span></div>
+  <div><span>2. Diagnóstico inicial (Fase 1)</span><span>3</span></div>
+  <div class="sub"><span>2.1 Capturas anotadas del diseño original</span><span>3</span></div>
+  <div class="sub"><span>2.2 Matriz de problemas (heurísticas de Nielsen)</span><span>4</span></div>
+  <div class="sub"><span>2.3 Análisis visual, accesibilidad, leyes de UX y CRAP</span><span>7</span></div>
+  <div><span>3. Justificación de las decisiones de diseño</span><span>8</span></div>
+  <div><span>4. Wireframes anotados (Fase 2)</span><span>9</span></div>
+  <div><span>5. Balance antes vs. después</span><span>12</span></div>
+ </div>
+
+ <h2>1. Introducción y elección del caso</h2>
+ <p>Para esta actividad he elegido la web del Ajuntament d'Alzira (alzira.es), junto con las webs a las que te manda cuando quieres hacer algo: la sede electrónica (sedeelectronica.alzira.es) y el sistema de cita previa (citaprevia.alzira.es). La he elegido porque es la de mi ciudad y porque la he tenido que usar alguna vez para cosas normales, como pedir cita en La Clau o buscar la farmacia de guardia, y siempre acabo perdiéndome entre páginas.</p>
+ <p>Lo que analizo es la versión web, tanto en ordenador como en el móvil, porque el Ayuntamiento no tiene una app propia para hacer trámites. El tipo de usuario que he tenido en mente es un vecino cualquiera que entra a hacer una gestión concreta (empadronarse, pagar un recibo, pedir cita) y quiere terminar rápido, no alguien que va a leer las noticias con calma.</p>
+ <p>He seguido las tres fases del enunciado. Primero hice la inspección heurística con las 10 heurísticas de Nielsen y apunté cada problema con su severidad de 0 a 4. Después revisé el color, el contraste según WCAG 2.1, la tipografía, las leyes de UX y los principios CRAP. Con eso diseñé los wireframes en media fidelidad para escritorio, móvil y tablet. Cada decisión del rediseño la he relacionado con uno de los problemas encontrados, para que no sea un cambio "porque queda más bonito".</p>
+ <div class="kv">
+  <div class="box"><b>Herramientas usadas</b><br><span class="small">Wireframes en HTML + CSS (media fidelidad, archivos editables adjuntos). Contrastes calculados con la fórmula de luminancia relativa de WCAG 2.1 (la misma que usa WebAIM Contrast Checker). Tipografía Inter.</span></div>
+  <div class="box"><b>Entregables</b><br><span class="small">Esta memoria en PDF y la carpeta <i>Wireframes_editables</i> con los archivos fuente (desktop.html, mobile.html, mobile_cita.html, tablet.html, paleta.html y wf.css) y sus exportaciones en PNG.</span></div>
+ </div>
+</section>
+
+<!-- ============ DIAGNÓSTICO: CAPTURAS ============ -->
+<section class="page">
+ <h1>2. Diagnóstico inicial</h1>
+ <h2 style="margin-top:0">2.1 Capturas anotadas del diseño original</h2>
+ <p>En las capturas he marcado con números los puntos donde aparece cada problema de la matriz del apartado 2.2 (P1 a P5).</p>
+ <figure><div class="shot" data-src="capturas/original_inicio_desktop.png" style="height:105mm">Captura 1 · alzira.es, página de inicio en escritorio</div><figcaption>Captura 1. Página de inicio de alzira.es en escritorio, con los problemas señalados.</figcaption></figure>
+ <div style="display:grid;grid-template-columns:0.8fr 1.2fr;gap:5mm">
+  <figure style="margin:0"><div class="shot" data-src="capturas/original_inicio_movil.png" style="height:92mm">Captura 2 · alzira.es en móvil</div><figcaption>Captura 2. Inicio en el móvil.</figcaption></figure>
+  <figure style="margin:0"><div class="shot" data-src="capturas/original_sede_catalogo.png" style="height:92mm">Captura 3 · catálogo de trámites de la sede electrónica</div><figcaption>Captura 3. Catálogo de trámites de sedeelectronica.alzira.es.</figcaption></figure>
+ </div>
+</section>
+
+<!-- ============ MATRIZ ============ -->
+<section class="page">
+ <h2 style="margin-top:0">2.2 Matriz de problemas detectados</h2>
+ <p>Todos los problemas son de la versión web (escritorio y móvil). La severidad sigue la escala de Nielsen: 0 no es problema, 1 cosmético, 2 menor, 3 mayor y 4 catástrofe de usabilidad.</p>
+ <table>
+  <tr><th style="width:8%">#</th><th style="width:30%">Problema</th><th style="width:27%">Heurística infringida</th><th style="width:9%">Sev.</th><th>Dónde lo resuelvo</th></tr>
+  <tr><td>P1</td><td>Los trámites están repartidos en cuatro webs con diseños distintos</td><td>H4 Consistencia y estándares (y H3 Control y libertad)</td><td><span class="sev s3">3</span></td><td>Desktop 3 y 7 · Mobile cita · Tablet 4</td></tr>
+  <tr><td>P2</td><td>Nombres de trámites en lenguaje administrativo y en mayúsculas</td><td>H2 Relación entre el sistema y el mundo real</td><td><span class="sev s3">3</span></td><td>Desktop 2 y 6 · Tablet 2 y 3</td></tr>
+  <tr><td>P3</td><td>Los trámites se ordenan por departamento y no por lo que quiere hacer el usuario</td><td>H6 Reconocer antes que recordar (y H7 Flexibilidad y eficiencia)</td><td><span class="sev s3">3</span></td><td>Desktop 6 · Mobile 4 y 6 · Tablet 1 y 2</td></tr>
+  <tr><td>P4</td><td>Valenciano y castellano mezclados en la versión en castellano</td><td>H4 Consistencia y estándares</td><td><span class="sev s2">2</span></td><td>Cabecera VAL | ES en las tres plataformas</td></tr>
+  <tr><td>P5</td><td>Información que se usa todos los días (farmacia de guardia, avisos) escondida y con nombres que no coinciden</td><td>H1 Visibilidad del estado del sistema (y H2)</td><td><span class="sev s2">2</span></td><td>Desktop 5 y 8 · Mobile 3</td></tr>
+ </table>
+
+ <div class="prob">
+  <h3>P1 · Cuatro webs distintas para hacer gestiones</h3>
+  <div class="meta">Plataforma: web (escritorio y móvil) · Heurística: H4 Consistencia y estándares, H3 Control y libertad · Severidad <span class="sev s3">3</span> (mayor)</div>
+  <p>Para hacer gestiones con el Ayuntamiento hay en realidad cuatro webs: la principal (alzira.es), la sede electrónica (sedeelectronica.alzira.es), la de cita previa (citaprevia.alzira.es) y el tablón de anuncios, que está en un dominio de la Generalitat (alzirasitae.sede.gva.es). Cada una tiene su cabecera, su menú y su forma de navegar. Por ejemplo, para pedir cita entras en Servicios municipales, luego en Cita previa, y de ahí te manda a otra web que no se parece en nada.</p>
+  <p><b>Impacto:</b> el usuario no sabe si sigue en la web oficial, pierde el menú para volver y tiene que aprender a manejar cada web por separado. A una persona mayor esto le puede hacer pensar que se ha equivocado y abandonar el trámite.</p>
+  <p><b>Mejora:</b> un único punto de entrada, "Trámites y cita previa", con la misma cabecera en todas las pantallas y la cita previa integrada en la propia página (servicio, fecha y horas libres en un solo bloque). La sede se queda como un botón fijo "Sede electrónica · Entrar".</p>
+ </div>
+
+</section>
+
+<section class="page">
+ <div class="prob">
+  <h3>P2 · Lenguaje de la administración, no del vecino</h3>
+  <div class="meta">Plataforma: web · Heurística: H2 Relación entre el sistema y el mundo real · Severidad <span class="sev s3">3</span> (mayor)</div>
+  <p>En el catálogo de la sede los trámites aparecen con nombres como "PADRÓN HABITANTES: Alta en el Padrón Municipal de Habitantes" o "ACTIVIDAD: Licencia ambiental", con la primera parte en mayúsculas y siguiendo el nombre interno del expediente. Además, la primera categoría del catálogo sigue siendo "00 COVID-19", cuando ya no es lo que busca la gente.</p>
+  <p><b>Impacto:</b> el usuario piensa en "quiero empadronarme" o "me he cambiado de piso", no en "alta en el padrón". Si no conoce la palabra exacta, no lo encuentra. Además, el texto en mayúsculas se lee peor porque se pierde la forma de las palabras.</p>
+  <p><b>Mejora:</b> un buscador grande que pregunta "¿Qué necesitas hacer?" con ejemplos reales, títulos en minúscula y escritos como una tarea, y una ficha de cada trámite con tres datos claros: precio, tiempo y cómo se hace.</p>
+ </div>
+ <div class="prob">
+  <h3>P3 · Organizado por departamentos y no por tareas</h3>
+  <div class="meta">Plataforma: web · Heurística: H6 Reconocer antes que recordar, H7 Flexibilidad y eficiencia de uso · Severidad <span class="sev s3">3</span> (mayor)</div>
+  <p>La web está montada siguiendo el organigrama del Ayuntamiento: Servicios municipales → Servicios sociales → Trámites y procedimientos; Servicios municipales → Urbanismo → …; La Clau → … Los trámites más habituales no tienen un acceso directo desde el inicio. El usuario tiene que recordar qué departamento lleva cada cosa, y algunos trámites aparecen a la vez en la sección del departamento y en la sede.</p>
+  <p><b>Impacto:</b> hay que hacer varios clics de prueba y error y volver atrás. Además, según la Ley de Hick, cuantas más opciones parecidas hay en cada menú, más tarda el usuario en decidirse. En la sede hay más de quince categorías antes de llegar a un trámite.</p>
+  <p><b>Mejora:</b> un bloque de "Trámites más usados" en la portada con las 7 tareas más comunes más "Ver todos". En móvil, una barra de pestañas fija con Trámites y Cita. En tablet, una lista maestra agrupada por temas que se entienden, como "Padrón y población" o "Impuestos y pagos".</p>
+ </div>
+
+</section>
+
+<section class="page">
+ <div class="prob">
+  <h3>P4 · Idiomas mezclados</h3>
+  <div class="meta">Plataforma: web · Heurística: H4 Consistencia y estándares · Severidad <span class="sev s2">2</span> (menor)</div>
+  <p>En la versión en castellano (las direcciones que empiezan por /es/) hay páginas cuyo título sigue en valenciano. Por ejemplo, la sección de La Clau se llama "Informació" y algunas noticias, como "La Clau amplia el seu servei incloent la cita prèvia", no están traducidas. También hay alguna errata en títulos de sección, como "Trámites y procedimentos".</p>
+  <p><b>Impacto:</b> no es grave para quien entiende los dos idiomas, pero sí para quien acaba de llegar a Alzira, y da sensación de web descuidada, lo que resta confianza en un sitio oficial.</p>
+  <p><b>Mejora:</b> un selector VAL | ES siempre visible en la cabecera, con el idioma activo subrayado, y contenidos completos en los dos idiomas. Lo repito igual en escritorio, móvil y tablet.</p>
+ </div>
+
+ <div class="prob">
+  <h3>P5 · Lo urgente, escondido (farmacias y avisos)</h3>
+  <div class="meta">Plataforma: web · Heurística: H1 Visibilidad del estado del sistema, H2 Relación con el mundo real · Severidad <span class="sev s2">2</span> (menor)</div>
+  <p>La farmacia de guardia es de lo más buscado en una web municipal, pero está dentro de "La ciudad" con el título "FARMACIAS DE URGENCIA", en mayúsculas, aunque la gente (y hasta el propio icono de la web) lo llama "farmacia de guardia". Los avisos importantes, como una alerta por lluvias, no tienen un sitio fijo en la portada y se mezclan con el resto de noticias.</p>
+  <p><b>Impacto:</b> justo cuando el usuario tiene prisa (alguien enfermo por la noche, una alerta meteorológica), tiene que buscar en lugar de verlo directamente.</p>
+  <p><b>Mejora:</b> una franja de aviso en color ámbar, debajo de la cabecera, que solo aparece si hay una alerta activa, y un bloque "Hoy en Alzira" con la farmacia de guardia, el tiempo y los teléfonos de emergencia.</p>
+ </div>
+ <p class="small">Fuentes de los datos: alzira.es (secciones Servicios municipales, Cita previa, La Clau y Farmacias), catálogo de trámites de sedeelectronica.alzira.es y citaprevia.alzira.es, consultadas en octubre de 2026.</p>
+</section>
+
+<!-- ============ ANÁLISIS VISUAL ============ -->
+<section class="page">
+ <h2 style="margin-top:0">2.3 Análisis visual y de accesibilidad</h2>
+ <h3>Paleta cromática y contraste</h3>
+ <div id="analisis-visual">
+ <p class="pend">PENDIENTE: colores reales medidos sobre las capturas.</p>
+ </div>
+ <h3>Jerarquía tipográfica</h3>
+ <div id="analisis-tipo"><p class="pend">PENDIENTE: medición sobre las capturas.</p></div>
+ <h3>Leyes de UX que se incumplen</h3>
+ <table>
+  <tr><th style="width:22%">Ley</th><th>Dónde se incumple en el original</th></tr>
+  <tr><td>Hick</td><td>Muchas opciones parecidas en cada nivel: menús por departamentos y más de quince categorías en el catálogo de la sede antes de llegar a un trámite. Elegir cuesta más tiempo.</td></tr>
+  <tr><td>Jakob</td><td>La gente está acostumbrada a webs de administración con un buscador central y un botón de "Sede / Entrar" arriba a la derecha (como en la mayoría de webs de la administración). Aquí cada una de las cuatro webs tiene su propia estructura, así que lo aprendido en una no sirve en las otras.</td></tr>
+  <tr><td>Miller</td><td>Listas largas sin agrupar (catálogo de trámites, enlaces de cada departamento) obligan a retener muchos elementos a la vez en lugar de grupos de 5–9.</td></tr>
+  <tr id="ley-fitts"><td>Fitts</td><td><span class="pend">PENDIENTE: tamaño de enlaces y botones en móvil medido en la captura.</span></td></tr>
+  <tr id="ley-vr"><td>Von Restorff</td><td><span class="pend">PENDIENTE: comprobar en la captura qué elemento destaca más en la portada.</span></td></tr>
+ </table>
+ <h3>Principios CRAP</h3>
+ <div id="analisis-crap"><p class="pend">PENDIENTE: comentario sobre la captura de inicio.</p></div>
+</section>
+
+<!-- ============ JUSTIFICACIÓN ============ -->
+<section class="page">
+ <h1 style="margin-bottom:2mm">3. Justificación de las decisiones de diseño</h1>
+ <figure style="margin:0 0 2mm"><img src="img/paleta_tipografia.png" alt="Paleta y escala tipográfica" style="width:46%"><figcaption>Figura 1. Paleta accesible y escala tipográfica del rediseño (archivo paleta.html).</figcaption></figure>
+ <h3>Paleta de colores</h3>
+ <p>El color principal es un azul institucional oscuro porque transmite seriedad y confianza, justo lo que se espera de un ayuntamiento, y es el que usan casi todas las webs públicas (Ley de Jakob). El resto son grises para el texto y tres colores con significado fijo: ámbar para avisos, rojo para errores y verde para confirmaciones. El color nunca es la única pista: los avisos llevan icono y texto.</p>
+ <table>
+  <tr><th>Color</th><th>Uso</th><th>Pareja medida</th><th>Contraste</th><th>WCAG 2.1</th></tr>
+  <tr><td><span class="sw" style="background:#0B4F8A"></span>#0B4F8A</td><td>Botones, menú, enlaces</td><td>blanco sobre azul</td><td>8,40:1</td><td>AAA</td></tr>
+  <tr><td><span class="sw" style="background:#1F2933"></span>#1F2933</td><td>Texto principal, pie</td><td>sobre #FFFFFF / #F4F6F8</td><td>14,76:1 / 13,62:1</td><td>AAA</td></tr>
+  <tr><td><span class="sw" style="background:#52606D"></span>#52606D</td><td>Texto secundario</td><td>sobre #FFFFFF / #F4F6F8</td><td>6,46:1 / 5,96:1</td><td>AA</td></tr>
+  <tr><td><span class="sw" style="background:#8A5300"></span>#8A5300</td><td>Texto de avisos</td><td>sobre #FFF4E0</td><td>5,81:1</td><td>AA</td></tr>
+  <tr><td><span class="sw" style="background:#B3261E"></span>#B3261E</td><td>Errores / urgencias</td><td>sobre blanco</td><td>6,54:1</td><td>AA</td></tr>
+  <tr><td><span class="sw" style="background:#1E6B3A"></span>#1E6B3A</td><td>Confirmaciones</td><td>sobre blanco</td><td>6,52:1</td><td>AA</td></tr>
+  <tr><td><span class="sw" style="background:#7B8794"></span>#7B8794</td><td>Bordes de campos</td><td>sobre blanco</td><td>3,66:1</td><td>AA (≥ 3:1 componentes)</td></tr>
+ </table>
+ <p>Todo el texto supera 4,5:1 y los bordes de campos superan 3:1 (mínimo para componentes). El enlace azul sobre el gris de secciones da 7,75:1. Las horas ocupadas de la cita (#9AA5B1) quedan por debajo, pero son elementos desactivados, que WCAG excluye, y además van tachadas.</p>
+ <h3>Escala tipográfica</h3>
+ <p>Uso Inter, una sin serifa pensada para pantalla. La escala es de tercera mayor (ratio 1,25) partiendo de 16 px: 16, 20, 25, 31 y 39 px. En móvil bajo un escalón cada título para que no ocupe media pantalla. El cuerpo nunca baja de 16 px, el texto pequeño nunca de 14 px, el interlineado es de 1,5 y las líneas no pasan de unos 70 caracteres, para que se pueda leer un rato sin cansarse.</p>
+ <h3>Leyes de UX aplicadas</h3>
+ <p><b>Jakob:</b> logo arriba a la izquierda, buscador en el centro, acceso a la sede arriba a la derecha y barra de pestañas abajo en el móvil, como en cualquier app. <b>Hick:</b> 5 apartados en el menú principal y 8 accesos en "Trámites más usados". <b>Fitts:</b> botones de mínimo 48 px de alto y el botón principal de la cita ocupa todo el ancho y se queda abajo, en la zona del pulgar. <b>Miller:</b> los trámites van en grupos pequeños con un título de tema. <b>Von Restorff:</b> solo hay un botón relleno de azul por pantalla, así que la acción principal destaca sola. <b>Gestalt (proximidad y región común):</b> tarjetas blancas sobre gris que separan bloques sin líneas. <b>CRAP:</b> contraste fuerte entre títulos y texto, los mismos componentes repetidos en las tres plataformas, todo alineado a una rejilla y cada etiqueta pegada a su campo.</p>
+</section>
+
+<!-- ============ WIREFRAMES ============ -->
+<section class="page">
+ <h1>4. Wireframes anotados</h1>
+ <p>Los wireframes son de media fidelidad: ya llevan la paleta y la tipografía reales, pero las imágenes son marcadores (cajas con aspa) y los iconos son cuadrados. Los números en círculo rosa y los recuadros discontinuos son solo anotaciones y no forman parte del diseño.</p>
+ <h2>4.1 Desktop · 1920 × 1080</h2>
+ <figure style="margin-top:1mm"><img src="img/wf_desktop.png" alt="Wireframe desktop"><figcaption>Figura 2. Portada en escritorio: menú superior jerarquizado y contenido en 4 columnas.</figcaption></figure>
+ <div class="callouts">
+  <div><span class="n">1</span><span><b>Saltar al contenido.</b> Primer elemento al pulsar Tab, para navegar con teclado o lector de pantalla (WCAG 2.4.1).</span></div>
+  <div><span class="n">2</span><span><b>Buscador por tareas</b> con ejemplos reales y atajo <i>/</i>. Resuelve P2 (H2) y da un camino rápido a usuarios expertos (H7).</span></div>
+  <div><span class="n">3</span><span><b>Sede electrónica · Entrar</b> arriba a la derecha, donde se espera el acceso (Ley de Jakob). P1.</span></div>
+  <div><span class="n">4</span><span><b>Menú de 5 apartados</b> pensado según lo que busca el vecino, con la sección activa marcada (Hick, H1). P3.</span></div>
+  <div><span class="n">5</span><span><b>Franja de aviso</b> en ámbar con icono y texto (5,81:1). Solo aparece si hay una alerta. P5 (H1).</span></div>
+  <div><span class="n">6</span><span><b>Trámites más usados:</b> 8 tarjetas iguales con título y explicación corta (repetición, región común). P2 y P3.</span></div>
+  <div><span class="n">7</span><span><b>Cita previa en la portada:</b> servicio, fecha y horas libres sin salir de la web. P1. Único botón relleno del bloque (Von Restorff).</span></div>
+  <div><span class="n">8</span><span><b>4 columnas</b> de información: noticias, agenda, "Hoy en Alzira" (farmacia de guardia, tiempo, emergencias) y ciudad. P5.</span></div>
+  <div><span class="n">9</span><span><b>Atajos de teclado</b> (/ buscar, Alt+C cita, Alt+0 accesibilidad), como pide el enunciado para escritorio (H7).</span></div>
+ </div>
+</section>
+
+<section class="page">
+ <h2 style="margin-top:0">4.2 Mobile · 375 × 667</h2>
+ <figure style="margin-top:1mm"><img src="img/wf_mobile.png" alt="Wireframes mobile" style="max-height:112mm"><figcaption>Figura 3. Inicio y paso 2 de la cita previa en móvil: una sola columna y navegación en la parte de abajo.</figcaption></figure>
+ <p>En el móvil no he encogido la versión de escritorio. He quitado las columnas, he dejado solo lo que se usa con una mano y he bajado la navegación a la zona del pulgar.</p>
+ <div class="callouts">
+  <div><span class="n">1</span><span><b>Cabecera mínima:</b> escudo, nombre y VAL|ES con área táctil de 48 × 48. P4.</span></div>
+  <div><span class="n">2</span><span><b>Buscador</b> justo arriba, a todo el ancho y de 48 px de alto. P2.</span></div>
+  <div><span class="n">3</span><span><b>Aviso</b> resumido en una línea con "Ver más". P5.</span></div>
+  <div><span class="n">4</span><span><b>Trámites en cuadrícula de 2</b> con iconos y texto corto, todo en una columna continua. P3.</span></div>
+  <div><span class="n">5</span><span><b>Ver todos los trámites</b> como botón secundario con borde (no compite con lo principal).</span></div>
+  <div><span class="n">6</span><span><b>Barra de pestañas</b> fija (Inicio, Trámites, Cita, Avisos, Más) en la zona fácil del pulgar (Fitts, Jakob).</span></div>
+ </div>
+ <h3>Pantalla de cita previa (paso 2 de 3)</h3>
+ <div class="callouts">
+  <div><span class="n">1</span><span><b>Indicador de pasos</b> "Paso 2 de 3" con barra de progreso (H1 Visibilidad del estado).</span></div>
+  <div><span class="n">2</span><span><b>Días como chips</b> de 48 px en lugar de un calendario pequeño que cuesta tocar (Fitts).</span></div>
+  <div><span class="n">3</span><span><b>Horas libres</b> en botones grandes; las ocupadas van tachadas y con borde discontinuo, así no se depende solo del color (H5 Prevención de errores).</span></div>
+  <div><span class="n">4</span><span><b>Solo 2 campos</b> (DNI y móvil, con teclado numérico) y confirmación por SMS. Menos campos, menos errores.</span></div>
+  <div><span class="n">5</span><span><b>Continuar</b> fijo abajo a todo el ancho, en la zona del pulgar. Es el único botón relleno (Von Restorff).</span></div>
+  <div><span class="n">←</span><span><b>Flecha atrás</b> de 48 × 48 y "Cambiar" servicio sin perder lo elegido (H3 Control y libertad).</span></div>
+ </div>
+</section>
+
+<section class="page">
+ <h2 style="margin-top:0">4.3 Tablet · 1024 × 768 y 768 × 1024</h2>
+ <figure style="margin-top:1mm"><img src="img/wf_tablet.png" alt="Wireframes tablet"><figcaption>Figura 4. Patrón maestro-detalle en horizontal (izquierda) y en vertical (derecha).</figcaption></figure>
+ <p>En tablet uso el patrón maestro-detalle: a la izquierda la lista de trámites y a la derecha la ficha del que has elegido, así no tienes que ir y volver de página en página. Es el mismo diseño en las dos orientaciones. Lo único que cambia al girar la tablet es que la lista se estrecha un poco y los datos de la ficha pasan de 3 columnas a 2. No hay que rehacer nada, la rejilla se adapta sola.</p>
+ <div class="callouts">
+  <div><span class="n">1</span><span><b>Raíl de navegación</b> lateral con las mismas 5 secciones que la barra del móvil (repetición, Jakob). Queda al alcance del pulgar izquierdo al sujetar la tablet.</span></div>
+  <div><span class="n">2</span><span><b>Lista maestra</b> agrupada por temas comprensibles, con filtros Todos / Online / Con cita. Resuelve P3 (Miller, Hick).</span></div>
+  <div><span class="n">3</span><span><b>Ficha resumen:</b> precio, tiempo y cómo se hace, lo primero que pregunta cualquiera. P2.</span></div>
+  <div><span class="n">4</span><span><b>Dos caminos claros:</b> "Hacerlo online (Cl@ve)" como acción principal y "Pedir cita presencial" como secundaria, sin salir de la página. P1.</span></div>
+ </div>
+ <div class="box" style="margin-top:4mm"><span class="small">Además: migas de pan ("Trámites › Padrón y población") para saber siempre dónde estás (H1, H3) y preguntas frecuentes desplegables al final de la ficha (H10 Ayuda y documentación).</span></div>
+</section>
+
+<!-- ============ BALANCE ============ -->
+<section class="page">
+ <h1>5. Balance antes vs. después</h1>
+ <h3>Ganancias que se pueden medir</h3>
+ <table>
+  <tr><th style="width:34%">Indicador</th><th style="width:33%">Antes (web actual)</th><th>Después (rediseño)</th></tr>
+  <tr><td>Webs distintas para informarse y pedir cita</td><td>2 o más (alzira.es + citaprevia.alzira.es, y la sede para tramitar)</td><td>1, con la misma cabecera siempre</td></tr>
+  <tr><td>Clics desde la portada hasta empezar a pedir cita</td><td>3 como mínimo y cambio de web (Servicios municipales → Cita previa → enlace externo)</td><td>0 en escritorio (bloque en la portada) y 1 en móvil (pestaña Cita)</td></tr>
+  <tr><td>Trámites frecuentes con acceso directo en la portada</td><td>Ninguno: hay que pasar por el departamento</td><td>7 + "Ver todos"</td></tr>
+  <tr><td>Contraste mínimo del texto</td><td id="antes-contraste"><span class="pend">PENDIENTE</span></td><td>5,51:1 (todas las parejas AA o AAA)</td></tr>
+  <tr><td>Tamaño mínimo de botones táctiles</td><td id="antes-tactil"><span class="pend">PENDIENTE</span></td><td>48 × 48 px</td></tr>
+  <tr><td>Datos personales para pedir cita</td><td>Formulario de la web externa</td><td>2 campos (DNI y móvil)</td></tr>
+  <tr><td>Problemas graves (severidad ≥ 3) sin resolver</td><td>3 (P1, P2, P3)</td><td>0 en los wireframes</td></tr>
+ </table>
+ <h3>Ganancias cualitativas</h3>
+ <p>La mayor mejora es que la web pasa a estar organizada por lo que quiere hacer el vecino y no por cómo está organizado el Ayuntamiento por dentro. Eso, junto con el buscador por tareas y los nombres en lenguaje normal, hace que alguien que no sabe nada de administración pueda encontrar un trámite sin ayuda. También se gana confianza, porque todo se ve como una sola web oficial y no como cuatro distintas, y se gana accesibilidad: la paleta cumple WCAG AA, se puede navegar con teclado y los botones tienen un tamaño cómodo para el dedo.</p>
+ <p>En cuanto a las plataformas, cada una tiene su patrón: en escritorio se aprovecha el ancho con 4 columnas y atajos de teclado, en el móvil se va a una columna con todo al alcance del pulgar, y en la tablet el maestro-detalle permite consultar varios trámites seguidos sin perder la lista.</p>
+ <h3>Conclusión</h3>
+ <p>Con esta actividad me he dado cuenta de que la mayoría de los fallos de la web del Ayuntamiento no son de que sea "fea", sino de organización y de lenguaje. Por eso el rediseño cambia sobre todo la estructura y no solo los colores. Como siguiente paso, lo suyo sería probar los wireframes con 4 o 5 vecinos de distintas edades, pidiéndoles tareas concretas (pedir cita, buscar la farmacia de guardia) y midiendo el tiempo y los errores, para comprobar que las mejoras funcionan de verdad.</p>
+ <p class="small" style="margin-top:6mm">Referencias: Nielsen, J. "10 Usability Heuristics for User Interface Design" (NN/g) · W3C, Web Content Accessibility Guidelines (WCAG) 2.1 · Yablonski, J. <i>Laws of UX</i> · Williams, R. <i>The Non-Designer's Design Book</i> (CRAP) · Apuntes de la Unidad 1 de Desarrollo de Interfaces.</p>
+</section>
+
+<script>
+document.querySelectorAll('.shot[data-src]').forEach(el=>{
+  const im=new Image();
+  im.onload=()=>{const f=document.createElement('img');f.src=el.dataset.src;f.style.maxHeight=el.style.height;f.style.maxWidth='100%';el.replaceWith(f)};
+  im.src=el.dataset.src;
+});
+</script>
+</body>
+</html>

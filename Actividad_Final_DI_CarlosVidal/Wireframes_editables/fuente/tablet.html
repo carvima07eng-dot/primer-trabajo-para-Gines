@@ -1,0 +1,68 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Wireframe Tablet — maestro-detalle</title>
+<link rel="stylesheet" href="wf.css">
+<style>
+html,body{width:100vw;height:100vh}
+body{display:grid;grid-template-columns:80px minmax(260px,34%) 1fr;grid-template-rows:64px 1fr;background:var(--fondo)}
+.top{grid-column:1/4;background:#fff;border-bottom:1px solid var(--linea);display:flex;align-items:center;gap:14px;padding:0 20px}
+.esc{width:30px;height:34px;border:2px solid var(--texto);border-radius:3px 3px 15px 15px}
+.top .input{margin-left:auto;width:42%;height:48px}
+.rail{background:#fff;border-right:1px solid var(--linea);display:flex;flex-direction:column;align-items:center;padding-top:14px;gap:8px}
+.rail div{width:64px;min-height:64px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:600;color:var(--texto2)}
+.rail .ico{width:24px;height:24px;border-color:var(--texto2)}
+.rail .on{background:#E6EEF6;color:var(--azul)} .rail .on .ico{background:var(--azul);border-color:var(--azul)}
+.master{background:#fff;border-right:1px solid var(--linea);overflow:hidden}
+.master .h{padding:16px 18px 8px;font-size:20px;font-weight:700}
+.filters{display:flex;gap:8px;padding:0 18px 10px;flex-wrap:wrap}
+.chip{min-height:40px;padding:0 12px;border:2px solid var(--borde);border-radius:20px;display:flex;align-items:center;font-size:14px;font-weight:600}
+.chip.on{background:var(--azul);color:#fff;border-color:var(--azul)}
+.grp{padding:10px 18px 4px;font-size:13px;font-weight:700;color:var(--texto2);text-transform:uppercase;letter-spacing:.04em}
+.it{min-height:56px;padding:8px 18px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--linea);font-size:16px}
+.it.on{background:#E6EEF6;border-left:5px solid var(--azul);font-weight:700;padding-left:13px}
+.detail{padding:24px 32px;overflow:hidden}
+.detail .crumb{font-size:14px;color:var(--texto2)}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:16px 0}
+.fact{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:12px 14px}
+.fact b{display:block;font-size:17px}
+.sec2{background:#fff;border:1px solid var(--linea);border-radius:10px;padding:16px 18px;margin-bottom:14px}
+.sec2 .h4{margin-bottom:8px}
+.acts{display:flex;gap:12px;margin-top:6px;flex-wrap:wrap}
+.lbl{position:absolute;right:10px;bottom:6px;font-size:12px;color:var(--texto2);font-weight:600}
+@media (max-width:800px){ .facts{grid-template-columns:1fr 1fr} .facts .fact:last-child{grid-column:1/-1} .top .input{width:50%} .detail{padding:20px} }
+</style></head><body class="sm">
+<div class="top"><div class="esc"></div><b style="font-size:18px">Ajuntament d'Alzira</b><div class="input">🔍 Buscar trámite</div><b style="font-size:14px">VAL|ES</b></div>
+<nav class="rail" data-co="1" data-pad="0">
+ <div><span class="ico"></span>Inicio</div><div class="on"><span class="ico"></span>Trámites</div><div><span class="ico"></span>Cita</div><div><span class="ico r"></span>Avisos</div><div><span class="ico"></span>Más</div>
+</nav>
+<section class="master" data-co="2" data-cp="tr" data-pad="0">
+ <div class="h">Trámites</div>
+ <div class="filters"><div class="chip on">Todos</div><div class="chip">Online</div><div class="chip">Con cita</div></div>
+ <div class="grp">Padrón y población</div>
+ <div class="it on">Certificado de empadronamiento <span>›</span></div>
+ <div class="it">Alta o cambio de domicilio <span>›</span></div>
+ <div class="grp">Impuestos y pagos</div>
+ <div class="it">Pagar un recibo <span>›</span></div>
+ <div class="it">Domiciliar tributos <span>›</span></div>
+ <div class="it">Calendario del contribuyente <span>›</span></div>
+ <div class="grp">Vía pública</div>
+ <div class="it">Avisar de una incidencia <span>›</span></div>
+ <div class="it">Tarjeta de aparcamiento PMR <span>›</span></div>
+ <div class="it">Ocupación de vía pública <span>›</span></div>
+ <div class="grp">Otros</div>
+ <div class="it">Instancia general <span>›</span></div>
+</section>
+<main class="detail">
+ <div class="crumb">Trámites › Padrón y población</div>
+ <div class="h2" style="margin:4px 0 0">Certificado de empadronamiento</div>
+ <div class="sec" style="max-width:620px">Documento que acredita que vives en Alzira. Te lo piden para matricularte, para ayudas o para el médico.</div>
+ <div class="facts" data-co="3" data-cp="tr" data-pad="4">
+  <div class="fact"><span class="small">Precio</span><b>Gratis</b></div>
+  <div class="fact"><span class="small">Tiempo</span><b>Al momento</b></div>
+  <div class="fact"><span class="small">Cómo</span><b>Online o presencial</b></div>
+ </div>
+ <div class="sec2"><div class="h4">Qué necesitas</div><div class="line" style="width:80%"></div><div class="line" style="width:60%;margin-top:10px"></div><div class="line" style="width:70%;margin-top:10px"></div></div>
+ <div class="acts" data-co="4" data-cp="tr" data-pad="5"><div class="btn">Hacerlo online (Cl@ve)</div><div class="btn out">Pedir cita presencial</div></div>
+ <div class="sec2" style="margin-top:14px"><div class="h4">Preguntas frecuentes</div><div class="it" style="padding:8px 0">¿Puedo pedirlo para otra persona? <span>▾</span></div><div class="it" style="padding:8px 0;border:0">¿Cuánto tiempo es válido? <span>▾</span></div></div>
+</main>
+<div class="lbl">Wireframe Tablet · maestro-detalle</div>
+<script src="annot.js"></script>
+</body></html>

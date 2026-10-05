@@ -1,0 +1,37 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><title>Wireframe Mobile 375x667 — Cita previa</title>
+<link rel="stylesheet" href="wf.css">
+<style>
+body{width:375px;height:667px;background:#fff}
+.hd{height:56px;display:flex;align-items:center;gap:8px;padding:0 8px;border-bottom:1px solid var(--linea)}
+.back{width:48px;height:48px;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;color:var(--azul)}
+.hd b{font-size:17px}
+.steps{padding:14px 16px 4px}
+.bar{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin-top:6px}
+.bar i{height:6px;border-radius:3px;background:var(--linea)} .bar i.on{background:var(--azul)}
+.f{padding:6px 16px}
+label{display:block;font-weight:600;font-size:15px;margin:12px 0 6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}
+.chip{min-height:48px;padding:0 14px;border:2px solid var(--borde);border-radius:24px;display:flex;align-items:center;font-size:15px;font-weight:600}
+.chip.on{background:var(--azul);border-color:var(--azul);color:#fff}
+.hours{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.h{min-height:48px;border:2px solid var(--borde);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:600}
+.h.off{border-style:dashed;color:#9AA5B1;text-decoration:line-through}
+.h.on{background:var(--azul);color:#fff;border-color:var(--azul)}
+.cta{position:absolute;left:0;right:0;bottom:0;padding:12px 16px 16px;background:#fff;border-top:1px solid var(--linea)}
+.cta .btn{width:100%;height:52px;font-size:17px}
+</style></head><body class="sm">
+<div class="hd"><div class="back">←</div><b>Pedir cita previa</b></div>
+<div class="steps" data-co="1" data-cp="tr" data-pad="2"><div class="small"><b style="color:var(--texto)">Paso 2 de 3</b> · Elige día y hora</div><div class="bar"><i class="on"></i><i class="on"></i><i></i></div></div>
+<div class="f">
+ <div class="small" style="margin-top:6px">Servicio: <b style="color:var(--texto)">La Clau · Certificado digital</b> <u style="color:var(--azul)">Cambiar</u></div>
+ <label>Día</label>
+ <div class="chips" data-co="2" data-cp="tr" data-pad="4"><div class="chip">Mar 6</div><div class="chip on">Mié 7</div><div class="chip">Jue 8</div><div class="chip">Más ▾</div></div>
+ <label>Hora disponible</label>
+ <div class="hours" data-co="3" data-cp="tr" data-pad="4"><div class="h">09:00</div><div class="h off">09:20</div><div class="h on">09:40</div><div class="h">10:00</div><div class="h">10:20</div><div class="h off">10:40</div></div>
+ <label>Tus datos</label>
+ <div data-co="4" data-cp="tr" data-pad="4"><div class="input">DNI / NIE</div><div class="input" style="margin-top:8px">Móvil (teclado numérico)</div></div>
+ <div class="small" style="margin-top:6px">Solo 2 datos. La confirmación llega por SMS.</div>
+</div>
+<div class="cta" data-co="5" data-pad="0"><div class="btn">Continuar</div></div>
+<script src="annot.js"></script>
+</body></html>
